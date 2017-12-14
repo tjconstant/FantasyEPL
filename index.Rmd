@@ -32,6 +32,7 @@ for(id in players){
   
   team_info <- data.frame(as.list(unlist(history[['entry']])))
   team_info <- team_info[,!names(team_info) %in% "kit"] # not everyone designs a kit
+  team_info <- team_info[,!names(team_info) %in% "favorite_team"] # not everyone sets a fav team
   
   all <- rbind(all,
                data.frame(team_info, 
