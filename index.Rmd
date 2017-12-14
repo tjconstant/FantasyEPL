@@ -55,9 +55,9 @@ temp <- unlist(temp)
 all <- cbind(all, league_rank = temp)
 ```
 
-## Plots {.tabset .tabset-fade}
+## Plots {.tabset .tabset-fade .tabset-pills}
 
-###  Cumalative Score
+###  Cumulative Score
 
 ```{r}
 ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_line()
@@ -67,6 +67,12 @@ ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point
 
 ```{r}
 ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
+```
+
+### Linear Regression: Recent Form (Last 5 GW)
+
+```{r}
+ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(data = subset(all, event >= (max(event)-5)), method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
 ```
 
 ### Team Value
