@@ -3,7 +3,7 @@ library(jsonlite)
 write_json(
 data.frame(
   uid = 1,
-  updateDate = "2016-05-23T00:00:00.0Z",
+  updateDate = Sys.time(),
   titleText = "FF",
   mainText = "Hello World!",
   redirectionUrl = "github.com/tjconstant"),
