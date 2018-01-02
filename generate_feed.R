@@ -4,9 +4,9 @@ league <- read_json("https://fantasy.premierleague.com/drf/leagues-classic-stand
 
 movement <- function(move){
   
-  if(move = "same") response <- "Still in"
-  if(move = "up") response <- "moving up this week"
-  if(move = "down") response <- "falling this week"
+  if(move == "same") response <- "Still in"
+  if(move == "up") response <- "moving up this week"
+  if(move == "down") response <- "falling this week"
   
   return(response)
 }
