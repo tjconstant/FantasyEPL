@@ -21,7 +21,7 @@ paste("In first place,", league$standings$results[[1]]$player_name, ", scoring",
 write_json(
 data.frame(
   uid = 1,
-  updateDate = paste0(Sys.Date(),"T20:00:00.0Z"),
+  updateDate = paste0(Sys.Date(),"T00:00:00.0Z"),
   titleText = "FF",
   mainText = words,
   redirectionUrl = "github.com/tjconstant"),
