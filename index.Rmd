@@ -92,3 +92,7 @@ ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + fa
 ```{r}
 ggplot(all, aes(event, league_rank, colour = name)) + geom_step(lwd = 1.25) + scale_y_reverse() + geom_point(size = 3) + facet_grid(manager ~ .)
 ```
+
+```{r echo = FALSE}
+source("generate_feed.R")
+```
