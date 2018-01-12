@@ -15,49 +15,70 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-```{r warning = FALSE, echo =  FALSE}
+```{r warning = FALSE, echo =  FALSE, message=FALSE}
 library(jsonlite)
-library(ggplot2)
+library(tidyverse)
 theme_set(theme_bw())
 ```
 
 
 ```{r echo = FALSE}
 players <- c(378067,2938617,1309360,386429,376149) # Tom C, Tom G, Ben, Ian, Gareth
+```
 
-all <- data.frame()
+```{r scrape, echo = FALSE}
+scrape <- function(players){
+  
+  all <- data.frame()
+  
+  for(id in players){
+    
+    history <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/",id,"/history"), simplifyVector = T)
+    
+    team_info <- data.frame(as.list(unlist(history[['entry']])))
+    team_info <- team_info[,!names(team_info) %in% "kit"] # not everyone designs a kit
+    team_info <- team_info[,!names(team_info) %in% "favourite_team"] # not everyone sets a fav team
+    
+    all <- rbind(all,
+                 data.frame(team_info, 
+                            manager = paste(team_info$player_first_name, team_info$player_last_name), 
+                            history[['history']])
+    )
+  }
+  
+  rank <- function(x){
+    position <- numeric(length(unique(x$id)))
+    position[(order(-x$total_points))] <- 1:(length(unique(x$id)))
+    return(position)
+  }
+  
+  temp <- data.frame()
+  for(i in 1:length(unique(all$event))){
+    temp <- rbind(temp, rank(subset(all, event == i)))
+  }
+  temp <- unlist(temp)
+  all <- cbind(all, league_rank = temp)
+  
+  # reorder factors for current leader
+  all$manager <- factor(all$manager, levels = unique(all$manager)[order(all$league_rank[all$event == max(all$event)])])
+  all$name <- factor(all$name, levels = unique(all$name)[order(all$league_rank[all$event == max(all$event)])])
+  
+  dates <- c()
+date <- read_json(paste0("https://fantasy.premierleague.com/drf/fixtures/", 1), simplifyVector = T)
 
-for(id in players){
-  
-  history <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/",id,"/history"), simplifyVector = T)
-  
-  team_info <- data.frame(as.list(unlist(history[['entry']])))
-  team_info <- team_info[,!names(team_info) %in% "kit"] # not everyone designs a kit
-  team_info <- team_info[,!names(team_info) %in% "favorite_team"] # not everyone sets a fav team
-  
-  all <- rbind(all,
-               data.frame(team_info, 
-                          manager = paste(team_info$player_first_name, team_info$player_last_name), 
-                          history[['history']])
-  )
+for(i in 1:(max(all$event))){
+  dates <- cbind(dates, subset(date, event == i & event_day == 1)[1,]$kickoff_time)
 }
 
-rank <- function(x){
-  position <- numeric(length(unique(x$id)))
-  position[(order(-x$total_points))] <- 1:(length(unique(x$id)))
-  return(position)
+all <- data.frame(all, gw_date = rep(as.Date(dates), length(unique(all$id))))
+  
+  return(all)
 }
 
-temp <- data.frame()
-for(i in 1:length(unique(all$event))){
-  temp <- rbind(temp, rank(subset(all, event == i)))
-}
-temp <- unlist(temp)
-all <- cbind(all, league_rank = temp)
+all <- scrape(players)
 
-# reorder factors for current leader
-all$manager <- factor(all$manager, levels = unique(all$manager)[order(all$league_rank[all$event == max(all$event)])])
-all$name <- factor(all$name, levels = unique(all$name)[order(all$league_rank[all$event == max(all$event)])])
+### Add Dates 
+
 
 ```
 
@@ -65,38 +86,38 @@ all$name <- factor(all$name, levels = unique(all$name)[order(all$league_rank[all
 
 ####  Cumulative Score
 
-```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_line()
+```{r cumscore}
+ggplot(all, aes(gw_date, total_points, colour = name, group = name))  + geom_point() + geom_line() + xlab("Gameweek Date") + ylab("Total Points")
 ```
 
 #### Linear Regression 
 
-```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
+```{r linreg}
+ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = F) + xlim(NA,38) + xlab("Gameweek") + ylab("Total Points")#+ xlim(as.Date("2017-08-11"), as.Date("2018-05-13")) 
 ```
 
 #### Linear Regression: Recent Form (Last 5 GW)
 
-```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(data = subset(all, event >= (max(event)-5)), method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
+```{r linreg2}
+ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(data = subset(all, event >= (max(event)-5)), method = "lm", fullrange = TRUE, se = F)  +xlim(NA, 38) + xlab("Gameweek") + ylab("Total Points")#+ xlim(as.Date("2017-08-11"), as.Date("2018-05-13"))
 ```
 
 #### Team Value
 
-```{r}
-ggplot(all, aes(event, value.1, colour = name, group = name))  + geom_point() + geom_smooth()
+```{r value}
+ggplot(all, aes(gw_date, value.1/10, colour = name, group = name))  + geom_point() + geom_smooth() + xlab("Gameweek Date") + ylab("Team Value (£ million)")
 ```
 
 #### Point Distribution By Manager
 
-```{r warning = FALSE, fig.height=6}
-ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_grid(manager~.) + coord_cartesian(expand = c(0,0)) + xlim(0,NA)
+```{r dist, warning = FALSE, fig.height=6}
+ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_grid(manager~.) + coord_cartesian(expand = c(0,0)) + xlim(0,NA) + xlab("Gameweek Points")
 ```
 
 #### Mini League Positions
 
-```{r fig.height=6}
-ggplot(all, aes(event, league_rank, colour = name)) + geom_step(lwd = 1.25)+ geom_point(size = 3) + facet_grid(manager ~ .)  + scale_y_continuous(breaks=1:5, trans = "reverse")
+```{r league, fig.height=6}
+ggplot(all, aes(gw_date, league_rank, colour = name)) + geom_step(lwd = 1.25)+ geom_point(size = 3) + facet_grid(manager ~ .)  + scale_y_continuous(breaks = 1:(length(unique(all$id))), trans = "reverse") + theme(panel.grid.minor = element_line(linetype = 0)) + xlab("Gameweek Date") + ylab("League Position")
 ```
 
 ```{r echo = FALSE}
@@ -108,40 +129,7 @@ source("generate_feed.R")
 ```{r echo = FALSE}
 players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945) 
 
-all <- data.frame()
-
-for(id in players){
-  
-  history <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/",id,"/history"), simplifyVector = T)
-  
-  team_info <- data.frame(as.list(unlist(history[['entry']])))
-  team_info <- team_info[,!names(team_info) %in% "kit"] # not everyone designs a kit
-  team_info <- team_info[,!names(team_info) %in% "favourite_team"] # not everyone sets a fav team
-  
-  all <- rbind(all,
-               data.frame(team_info, 
-                          manager = paste(team_info$player_first_name, team_info$player_last_name), 
-                          history[['history']])
-  )
-}
-
-rank <- function(x){
-  position <- numeric(length(unique(x$id)))
-  position[(order(-x$total_points))] <- 1:(length(unique(x$id)))
-  return(position)
-}
-
-temp <- data.frame()
-for(i in 1:length(unique(all$event))){
-  temp <- rbind(temp, rank(subset(all, event == i)))
-}
-temp <- unlist(temp)
-all <- cbind(all, league_rank = temp)
-
-# reorder factors for current leader
-all$manager <- factor(all$manager, levels = unique(all$manager)[order(all$league_rank[all$event == max(all$event)])])
-all$name <- factor(all$name, levels = unique(all$name)[order(all$league_rank[all$event == max(all$event)])])
-
+all <- scrape(players)
 ```
 
 ### Plots: UoE Premiership {.tabset .tabset-fade .tabset-pills}
@@ -149,35 +137,35 @@ all$name <- factor(all$name, levels = unique(all$name)[order(all$league_rank[all
 ####  Cumulative Score
 
 ```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_line()
+<<cumscore>>
 ```
 
 #### Linear Regression 
 
 ```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
+<<linreg>>
 ```
 
 #### Linear Regression: Recent Form (Last 5 GW)
 
 ```{r}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(data = subset(all, event >= (max(event)-5)), method = "lm", fullrange = TRUE, se = F) + xlim(NA, 38)
+<<linreg2>>
 ```
 
 #### Team Value
 
 ```{r}
-ggplot(all, aes(event, value.1, colour = name, group = name))  + geom_point() + geom_smooth()
+<<value>>
 ```
 
 #### Point Distribution By Manager
 
 ```{r fig.height = 10, warning = FALSE}
-ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_grid(manager~.) + coord_cartesian(expand = c(0,0))  + xlim(0,NA)
+<<dist>>
 ```
 
 #### Mini League Positions
 
 ```{r fig.height = 10}
-ggplot(all, aes(event, league_rank, colour = name)) + geom_step(lwd = 1.25) + geom_point(size = 3) + facet_grid(manager ~ .) + scale_y_continuous(breaks=1:9, trans = "reverse")
+<<league>>
 ```
