@@ -93,7 +93,7 @@ ggplot(all, aes(gw_date, total_points, colour = name, group = name))  + geom_poi
 #### Linear Regression 
 
 ```{r linreg}
-ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = F) + xlim(NA,38) + xlab("Gameweek") + ylab("Total Points")#+ xlim(as.Date("2017-08-11"), as.Date("2018-05-13")) 
+ggplot(all, aes(event, total_points, colour = name, fill = name, group = name))  + geom_point() + geom_smooth(method = "lm", fullrange = TRUE, se = T, alpha = 0.2, formula = y ~ x + 0) + xlim(NA,38) + xlab("Gameweek") + ylab("Total Points")#+ xlim(as.Date("2017-08-11"), as.Date("2018-05-13")) 
 ```
 
 #### Linear Regression: Recent Form (Last 5 GW)
@@ -105,7 +105,7 @@ ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point
 #### Team Value
 
 ```{r value}
-ggplot(all, aes(gw_date, value.1/10, colour = name, group = name))  + geom_point() + geom_smooth() + xlab("Gameweek Date") + ylab("Team Value (£ million)")
+ggplot(all, aes(gw_date, value.1/10, colour = name, fill = name, group = name))  + geom_point() + geom_smooth(alpha = 0.2) + xlab("Gameweek Date") + ylab("Team Value (£ million)")
 ```
 
 #### Point Distribution By Manager
