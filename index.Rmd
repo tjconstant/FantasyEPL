@@ -1,7 +1,6 @@
 ---
-title: "Fantasy Football"
+title: "Fantasy Football 2017/18"
 author: "Tom Constant"
-date: "10/12/2017"
 output: html_document
 ---
 
@@ -9,11 +8,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Current Ratings {.tabset}
+# Current Ratings {.tabset} 
+Updated `r Sys.time()`
 
 ## Physics Fantasy Football  
-
-
 
 ```{r warning = FALSE, echo =  FALSE, message=FALSE}
 library(jsonlite)
