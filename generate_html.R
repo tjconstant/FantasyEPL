@@ -1,0 +1,1 @@
+rmarkdown::render("index.Rmd", clean = TRUE)
