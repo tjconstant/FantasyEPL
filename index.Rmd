@@ -80,6 +80,21 @@ all <- scrape(players)
 
 ```
 
+### Table: Physics Fantasy Football 
+
+```{r table, echo = FALSE, results='html'}
+tb <- subset(all, event == max(all$event))
+
+tb <- tb[order(-tb$total_points),]
+
+knitr::kable(data.frame(
+  pos = 1:length(unique(tb$manager)),manager = tb$manager,team = tb$name, `gameweek points` = tb$points, `total points` = tb$total_points
+)
+)
+
+#, mv = "\U25B2"
+```
+
 ### Plots: Physics Fantasy Football {.tabset .tabset-fade .tabset-pills}
 
 ####  Cumulative Score
@@ -128,6 +143,12 @@ source("generate_feed.R")
 players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945) 
 
 all <- scrape(players)
+```
+
+### Table: UoE Premiership
+
+```{r echo = FALSE}
+<<table>>
 ```
 
 ### Plots: UoE Premiership {.tabset .tabset-fade .tabset-pills}
