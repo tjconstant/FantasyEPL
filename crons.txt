@@ -504,7 +504,7 @@
 1 0  24 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  25 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  26 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 0  31 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 0  1 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  2 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  15 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  16 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -540,7 +540,7 @@
 1 0  28 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  29 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  31 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 0  32 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 0  1 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  2 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  3 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  4 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -552,7 +552,7 @@
 1 0  22 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  23 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  31 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 0  32 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 0  1 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  4 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  5 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  6 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -565,7 +565,7 @@
 1 0  4 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  11 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  18 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 0  32 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 0  1 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  8 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  15 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 0  22 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -589,7 +589,7 @@
 1 4  24 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  25 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  26 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 4  31 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 4  1 9 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  2 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  15 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  16 10 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -625,7 +625,7 @@
 1 4  28 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  29 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  31 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 4  32 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 4  1 12 * 2017 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  2 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  3 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  4 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -637,7 +637,7 @@
 1 4  22 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  23 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  31 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 4  32 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 4  1 1 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  4 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  5 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  6 2 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
@@ -650,7 +650,7 @@
 1 4  4 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  11 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  18 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
-1 4  32 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
+1 4  1 3 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  8 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  15 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R
 1 4  22 4 * 2018 cd /var/www/html/FantasyEPL/ && R CMD BATCH generate_all.R

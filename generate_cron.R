@@ -19,8 +19,8 @@ crons <-
   unique(
     c(
       paste(minute(dates),hour(dates),day(dates),month(dates),"*",year(dates),command),
-      paste("1 0 ",day(dates)+1,month(dates),"*",year(dates),command),
-      paste("1 4 ",day(dates)+1,month(dates),"*",year(dates),command)
+      paste("1 0 ",day(dates+ddays(1)),month(dates),"*",year(dates),command),
+      paste("1 4 ",day(dates+ddays(1)),month(dates),"*",year(dates),command)
     )
   )
 
