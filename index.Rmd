@@ -1,10 +1,8 @@
 ---
 title: "Fantasy Football 2017/18"
 author: "Tom Constant"
-output: 
-  html_document:
-    includes:
-      before_body: refresh.html
+output: html_document
+
 ---
 
 ```{r setup, include=FALSE}
