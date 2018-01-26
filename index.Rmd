@@ -128,6 +128,32 @@ ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(unique(
 
 ```
 
+#### Gain Loss Matrix
+
+```{r glm, warning=FALSE, fig.asp=0.75}
+gw <- subset(all, event == max(all$event))
+
+N <- length(gw$points)
+
+gal <- array(gw$points, dim = c(N,N)) - t(array(gw$points, dim = c(N,N)))
+dim(gal) <- c(N*N,1)
+
+gal.labels <- as.character(gal)
+gal.labels[gal > 0] <- paste0("+",gal.labels[gal > 0])
+gal.labels[gal == 0] <- ""
+
+gal.df <- data.frame(x = gw$manager, y = rep(gw$manager, each = N), gal)
+levels(gal.df$y) <- paste("vs.", levels(gal.df$y))
+
+ggplot(gal.df, aes(x, y, fill = gal, label = gal.labels)) + 
+  geom_raster() + 
+  geom_text() + 
+  scale_fill_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
+  scale_x_discrete(position = "top") +
+  xlab("") + ylab("") + coord_cartesian(expand = c(0,0)) + 
+  ggtitle(paste("Gameweek", max(all$event)))
+```
+
 #### Team Value
 
 ```{r value}
@@ -188,6 +214,12 @@ all <- scrape(players)
 
 ```{r fig.width = 9}
 <<rpi>>
+```
+
+#### Gain Loss Matrix
+
+```{r warning=FALSE, fig.asp=0.75, fig.width=10}
+<<glm>>
 ```
 
 #### Team Value
