@@ -186,7 +186,7 @@ all <- scrape(players)
 
 #### Relative Performance Index
 
-```{r}
+```{r fig.width = 9}
 <<rpi>>
 ```
 
