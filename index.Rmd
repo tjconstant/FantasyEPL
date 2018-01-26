@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # Current Ratings {.tabset} 
@@ -89,7 +89,7 @@ tb <- subset(all, event == max(all$event))
 tb <- tb[order(-tb$total_points),]
 
 knitr::kable(data.frame(
-  pos = 1:length(unique(tb$manager)),manager = tb$manager,team = tb$name, `gameweek points` = tb$points*10, `total points` = tb$total_points
+  pos = 1:length(unique(tb$manager)),manager = tb$manager,team = tb$name, `gameweek points` = tb$points, `total points` = tb$total_points
 )
 )
 
@@ -114,6 +114,18 @@ ggplot(all, aes(event, total_points, colour = name, fill = name, group = name)) 
 
 ```{r linreg2}
 ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point() + geom_smooth(data = subset(all, event >= (max(event)-5)), method = "lm", fullrange = TRUE, se = F)  +xlim(NA, 38) + xlab("Gameweek") + ylab("Total Points")#+ xlim(as.Date("2017-08-11"), as.Date("2018-05-13"))
+```
+
+#### Relative Performance Index
+
+```{r rpi, message=FALSE, fig.width =9}
+library(dplyr)
+mean_data <- group_by(all, event) %>%
+  summarise(points = mean(points, na.rm = TRUE))
+
+ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(unique(all$name)))), aes(event, mean_gw, fill = manager, colour = manager)) + 
+  geom_bar(stat = "identity", position = "identity", alpha = 0.5) + scale_x_continuous(breaks=1:(max(all$event))) + xlab("Gameweek") + ylab("Relative Performance Index")
+
 ```
 
 #### Team Value
@@ -170,6 +182,12 @@ all <- scrape(players)
 
 ```{r}
 <<linreg2>>
+```
+
+#### Relative Performance Index
+
+```{r}
+<<rpi>>
 ```
 
 #### Team Value
