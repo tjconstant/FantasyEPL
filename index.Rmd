@@ -90,7 +90,7 @@ tb <- tb[order(-tb$total_points),]
 
 knitr::kable(data.frame(
   pos = 1:length(unique(tb$manager)),manager = tb$manager,team = tb$name, `gameweek points` = tb$points*10, `total points` = tb$total_points
-), format = "html", table.attr = "id=\"mytable\", class=\"table table-condensed\""
+)
 )
 
 #, mv = "\U25B2"
