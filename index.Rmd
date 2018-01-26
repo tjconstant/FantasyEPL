@@ -150,6 +150,8 @@ ggplot(gal.df, aes(x, y, fill = gal, label = gal.labels)) +
   geom_text() + 
   scale_fill_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
   scale_x_discrete(position = "top") +
+  scale_y_discrete(position="right") +
+  theme(legend.position = "none") +
   xlab("") + ylab("") + coord_cartesian(expand = c(0,0)) + 
   ggtitle(paste("Gameweek", max(all$event)))
 ```
