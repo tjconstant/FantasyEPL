@@ -1,8 +1,9 @@
 ---
 title: "Fantasy Football 2017/18"
 author: "Tom Constant"
-output: html_document
-
+output: 
+  html_document: 
+    self_contained: no
 ---
 
 ```{r setup, include=FALSE}
@@ -130,7 +131,7 @@ ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(unique(
 
 #### Gain Loss Matrix
 
-```{r glm, warning=FALSE, fig.asp=0.75}
+```{r glm, warning=FALSE, fig.asp=1}
 gw <- subset(all, event == max(all$event))
 
 N <- length(gw$points)
@@ -146,14 +147,15 @@ gal.df <- data.frame(x = gw$manager, y = rep(gw$manager, each = N), gal)
 levels(gal.df$y) <- paste("vs.", levels(gal.df$y))
 
 ggplot(gal.df, aes(x, y, fill = gal, label = gal.labels)) + 
-  geom_raster() + 
+  geom_raster(alpha = 0.5) + geom_point(aes(colour = gal), size = 25) +
   geom_text() + 
   scale_fill_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
+  scale_colour_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
   scale_x_discrete(position = "top") +
   scale_y_discrete(position="right") +
   theme(legend.position = "none") +
   xlab("") + ylab("") + coord_cartesian(expand = c(0,0)) + 
-  ggtitle(paste("Gameweek", max(all$event)))
+  ggtitle(paste("Gameweek", max(all$event))) + coord_fixed(expand = c(0,0))
 ```
 
 #### Team Value
@@ -220,7 +222,7 @@ all <- scrape(players)
 
 #### Gain Loss Matrix
 
-```{r warning=FALSE, fig.asp=0.75, fig.width=10}
+```{r warning=FALSE, fig.asp = 1, fig.width=10}
 <<glm>>
 ```
 
