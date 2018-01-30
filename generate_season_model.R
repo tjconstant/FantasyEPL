@@ -3,15 +3,16 @@ N <- 1000
 
 #pb <- txtProgressBar(min = 0, max = N, initial = 0)
 
+
 for(m in unique(all$manager)){
-  a <- subset(all, manager == m)
+  a <- subset(all, manager == m & event <= 15)
   pdf_of_data <- density(a$points)
   
   for(n in 1:N){
     random.points <- approx(
       cumsum(pdf_of_data$y)/sum(pdf_of_data$y),
       pdf_of_data$x,
-      runif(38-max(a$event))
+      runif(38-15)
     )$y
     
     season_model <- rbind(season_model,data.frame(itr = n , manager = m, final_score=(max(a$total_points) + sum(random.points))))
@@ -26,6 +27,7 @@ result <-
   group_by(manager) %>% 
   summarise(n = n(), mean = mean(final_score), pct = round(100*n()/N,2), label = paste0(round(100*n()/N,2), "%"))
 
+if(any(!(unique(all$manager) %in% result$manager))){
 result <- rbind(
   result,
   data.frame(
@@ -35,6 +37,7 @@ result <- rbind(
     pct = 0,
     label = "<0.01%"
     ))
+}
 
 result$manager <- factor(result$manager, levels = result$manager[order(result$pct)])
 

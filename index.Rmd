@@ -200,7 +200,7 @@ result <-
   slice(which.max(final_score)) %>% 
   group_by(manager) %>% 
   summarise(n = n(), mean = mean(final_score), pct = round(100*n()/N,2), label = paste0(round(100*n()/N,2), "%"))
-
+if(any(!(unique(all$manager) %in% result$manager))){
 result <- rbind(
   result,
   data.frame(
@@ -210,6 +210,7 @@ result <- rbind(
     pct = 0,
     label = "0%"
     ))
+}
 
 result$manager <- factor(result$manager, levels = result$manager[order(-result$pct)])
 
