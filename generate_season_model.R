@@ -1,18 +1,20 @@
 season_model <- data.frame()
 N <- 1000
+gw.sim <- max(all$event)  # gameweek to simulate from
+gw.pdf <- gw.sim # gameweek to calc prob from
 
 #pb <- txtProgressBar(min = 0, max = N, initial = 0)
 
 
 for(m in unique(all$manager)){
-  a <- subset(all, manager == m & event <= 15)
+  a <- subset(all, manager == m & event <= gw.pdf)
   pdf_of_data <- density(a$points)
   
   for(n in 1:N){
     random.points <- approx(
       cumsum(pdf_of_data$y)/sum(pdf_of_data$y),
       pdf_of_data$x,
-      runif(38-15)
+      runif(38-gw.sim)
     )$y
     
     season_model <- rbind(season_model,data.frame(itr = n , manager = m, final_score=(max(a$total_points) + sum(random.points))))
