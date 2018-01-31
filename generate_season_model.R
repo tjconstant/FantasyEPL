@@ -1,3 +1,5 @@
+players <- c(378067,2938617,1309360,386429,376149) # Tom C, Tom G, Ben, Ian, Gareth
+all <- scrape(players)
 
 ag.result <- data.frame()
 N <- 1000
@@ -75,3 +77,13 @@ ggplot(result, aes(x=manager, y=1, fill = pct, colour = pct)) +
   scale_colour_gradientn(colours = c('red2', 'transparent', 'chartreuse3'))
 
 ggplot(ag.result, aes(gw,pct, colour = manager)) + geom_point(size=2) + geom_line(size=1.2) + xlab("gameweek") + ylab("% seasons won") +theme_bw()
+
+p<-
+ggplot(ag.result, aes(gw,pct, colour = manager, fill = manager)) + 
+  geom_area(position="fill") + 
+  xlab("gameweek") + 
+  ylab("% seasons won") +
+  theme_bw() + coord_cartesian(expand = c(0,0)) + scale_fill_discrete(c = 70, l = 80)
+p
+
+ggplotly(p)
