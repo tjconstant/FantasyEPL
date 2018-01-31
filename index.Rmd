@@ -18,6 +18,7 @@ Updated `r Sys.time()`
 ```{r warning = FALSE, echo =  FALSE, message=FALSE}
 library(jsonlite)
 library(ggplot2)
+library(plotly)
 theme_set(theme_bw())
 ```
 
@@ -119,14 +120,15 @@ ggplot(all, aes(event, total_points, colour = name, group = name))  + geom_point
 
 #### Relative Performance Index
 
-```{r rpi, message=FALSE, fig.width =9}
+```{r rpi, message=FALSE, warning = FALSE,error=FALSE, fig.width =9}
 library(dplyr)
 mean_data <- group_by(all, event) %>%
   summarise(points = mean(points, na.rm = TRUE))
 
-ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(unique(all$name)))), aes(event, mean_gw, fill = manager, colour = manager)) + 
-  geom_bar(stat = "identity", position = "identity", alpha = 0.5) + scale_x_continuous(breaks=1:(max(all$event))) + xlab("Gameweek") + ylab("Relative Performance Index")
+p<-ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(unique(all$name)))), aes(event, mean_gw, fill = manager, colour = manager)) + 
+  geom_bar(stat = "identity", position = "identity", alpha = 0.5) + scale_x_continuous(breaks=1:(max(all$event))) + xlab("Gameweek") + ylab("Relative Performance Index") + theme(legend.title = element_blank())
 
+ggplotly(p, tooltip = "") %>% config(displayModeBar = FALSE)  %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE))
 ```
 
 #### Gain Loss Matrix
