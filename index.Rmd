@@ -169,7 +169,7 @@ ggplot(all, aes(gw_date, value.1/10, colour = name, fill = name, group = name)) 
 #### Point Distribution By Manager
 
 ```{r dist, warning = FALSE, fig.height=6}
-ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_wrap(~manager, ncol = 2) + coord_cartesian(expand = c(0,0)) + xlim(0,NA) + xlab("Gameweek Points")
+ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_wrap(~manager, ncol = 3) + coord_cartesian(expand = c(0,0)) + xlim(0,NA) + xlab("Gameweek Points")
 ```
 
 Based on these probability distributions, and simulating 1000 different season outcomes for the remaining gameweeks, the percentage of seasons won by the players is as follows:
