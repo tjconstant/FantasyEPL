@@ -131,6 +131,30 @@ p<-ggplot(data.frame(all, mean_gw = all$points-rep(mean_data$points, length(uniq
 ggplotly(p, tooltip = "") %>% config(displayModeBar = FALSE)  %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE))
 ```
 
+```{r si, fig.height=1.5}
+rpi.df <- data.frame(manager = all$manager,
+           rpi = all$points-rep(mean_data$points, length(unique(all$name))))
+rpi.df <-               
+rpi.df %>% 
+  group_by(manager) %>% 
+  count(si = rpi >= 0 & rpi != 0) %>%
+  mutate(sindex=n[si==T]-n[si==F]) %>%
+  mutate(label = sindex)
+
+ggplot(rpi.df, aes(x=manager, y=1, fill = sindex, colour = sindex)) + 
+  geom_point(size = 25) + 
+  geom_text(aes(label = label), colour = 1) +
+  theme_minimal() + 
+  theme(legend.position = "none",line = element_blank(),
+        axis.line = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title = element_blank()
+  ) + 
+  scale_fill_gradientn(colours = c('red2', 'transparent', 'chartreuse3')) + 
+  scale_colour_gradientn(colours = c('red2', 'transparent', 'chartreuse3')) + ggtitle("Realative Skill Index")
+
+```
+
 #### Gain Loss Matrix
 
 ```{r glm, warning=FALSE, fig.asp=1}
@@ -279,6 +303,10 @@ all <- scrape(players)
 <<rpi>>
 ```
 
+```{r, fig.height=1.5}
+<<si>>
+```
+
 #### Gain Loss Matrix
 
 ```{r warning=FALSE, fig.asp = 1, fig.width=10}
@@ -293,7 +321,7 @@ all <- scrape(players)
 
 #### Point Distribution By Manager
 
-```{r fig.height = 7, warning = FALSE}
+```{r fig.height = 6, warning = FALSE}
 <<dist>>
 ```
 
