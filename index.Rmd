@@ -20,6 +20,7 @@ library(jsonlite)
 library(ggplot2)
 library(plotly)
 theme_set(theme_bw())
+player_details <- fromJSON("https://fantasy.premierleague.com/drf/bootstrap-static")$elements
 ```
 
 
@@ -259,6 +260,66 @@ ggplot(result, aes(x=manager, y=1, fill = pct, colour = pct)) +
 ggplot(all, aes(gw_date, league_rank, colour = name)) + geom_step(lwd = 1.25)+ geom_point(size = 3) + facet_grid(manager ~ .)  + scale_y_continuous(breaks = 1:(length(unique(all$id))), trans = "reverse") + theme(panel.grid.minor = element_line(linetype = 0)) + xlab("Gameweek Date") + ylab("League Position")
 ```
 
+#### Captain Choices
+```{r captains, warning=FALSE, message=FALSE, error=FALSE}
+managers <- players
+
+get_team <- function(id, gw = 1) {
+
+  out <- c()
+for(id in id){  
+  for (gw.n in gw) {
+    temp <- read_json(
+      paste0(
+        "https://fantasy.premierleague.com/drf/entry/",
+        id,
+        "/event/",
+        gw.n,
+        "/picks"
+      ),
+      simplifyVector = T
+    )$picks
+    
+    names(temp)[1] <- "id"
+    
+    temp <- temp %>% left_join(., player_details, by = "id")
+    out <- rbind(out, cbind(gw = gw.n, manager = get_manager(id), temp))
+  }
+}
+  out
+}
+
+
+get_manager <- function(id) {
+  data <-
+    read_json(paste0("https://fantasy.premierleague.com/drf/entry/", id),
+              simplifyVector = T)
+  
+  return(paste(data$entry$player_first_name, data$entry$player_last_name))
+  
+}
+
+a <- get_team(managers,1:25)
+
+a %>% 
+  filter(is_captain == TRUE) %>%
+  group_by(manager) %>%
+  count(web_name) %>%
+  ggplot(aes(x = web_name, y=n, fill = manager)) + 
+  geom_histogram(stat = "identity") + coord_flip() + xlab("Captain Choice") + ylab("Count") + ggtitle("Captain Choices")
+```
+
+```{r vice, warning=FALSE, message=FALSE, error=FALSE}
+a %>% 
+  filter(is_vice_captain == TRUE) %>%
+  group_by(manager) %>%
+  count(web_name) %>%
+  ggplot(aes(x = web_name, y=n, fill = manager)) + 
+  geom_histogram(stat = "identity") + coord_flip() + xlab("Vice Captain Choice") + ylab("Count") + ggtitle("Vice Captain Choices")
+
+```
+
+
 ```{r echo = FALSE}
 source("generate_feed.R")
 ```
@@ -335,4 +396,13 @@ Based on these probability distributions, and simulating 1000 different season o
 
 ```{r fig.height = 10}
 <<league>>
+```
+
+#### Captain Choices
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+<<captains>>
+```
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+<<vice>>
 ```
