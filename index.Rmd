@@ -254,6 +254,62 @@ ggplot(result, aes(x=manager, y=1, fill = pct, colour = pct)) +
   scale_colour_gradientn(colours = c('red2', 'transparent', 'chartreuse3'))
 ```
 
+##### Probability Grids
+
+```{r probgrid, fig.height=5}
+result <- c()
+
+n_managers <- length(unique(all$manager))
+
+for(place in (1:n_managers)) {
+  result <- rbind(
+    result,
+    season_model %>%
+      group_by(itr) %>%
+      slice(which(
+        final_score == sort(final_score, decreasing = T)[place]
+      )) %>%
+      group_by(manager) %>%
+      summarise(
+        n = n(),
+        mean = mean(final_score),
+        pct = round(100 * n() / N, 2),
+        label = paste0(round(100 * n() / N, 2), "%"),
+        place = place
+      )
+  )
+  if(any(
+    !(unique(all$manager) %in% result[result$place==place,]$manager)
+  )){
+    result <- rbind(result,
+data.frame(
+  manager = unique(all$manager)[!(unique(all$manager) %in% result[result$place==place,]$manager)],
+  n = 0,
+  mean = NA,
+  pct = 0,
+  label = "0%",
+  place=place)
+)
+  }
+}
+
+result$manager <- factor(result$manager, 
+                         levels = result$manager[order(-result$pct[result$place == 1])])
+
+orindals <- c("1st", "2nd", "3rd", paste0(4:20, "th"))
+
+ggplot(result, aes(place, 1, colour = pct, fill = pct, label = label)) +
+  geom_point(size = 20, shape = 22) +
+  scale_fill_gradientn(colours = c('red2', 'transparent', 'chartreuse3')) +
+  scale_colour_gradientn(colours = c('red2', 'transparent', 'chartreuse3')) +
+  geom_text(colour = 'black') + 
+  facet_wrap(~manager , ncol = 1) + 
+  xlab("Final Position") + 
+  ylab("") + theme(axis.text.y  = element_blank(), legend.position = "none",
+                   axis.ticks.y = element_blank()) +
+  scale_x_continuous(expand = c(0,1),breaks = (1:(n_managers)), labels = orindals[(1:(n_managers))])
+```
+
 #### Mini League Positions
 
 ```{r league, fig.height=6}
@@ -390,6 +446,10 @@ Based on these probability distributions, and simulating 1000 different season o
 
 ```{r echo = F, fig.height=2, fig.width=9}
 <<sim>>
+```
+
+```{r, fig.height=9}
+<<probgrid>>
 ```
 
 #### Mini League Positions
