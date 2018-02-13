@@ -179,7 +179,7 @@ ggplot(gal.df, aes(x, y, fill = gal, label = gal.labels)) +
   scale_fill_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
   scale_colour_gradientn(colours = c('red', 'transparent', 'chartreuse3')) + 
   scale_x_discrete(position = "top") +
-  scale_y_discrete(position="right") +
+  scale_y_discrete(position="right", limits = rev(levels(gal.df$y))) +
   theme(legend.position = "none") +
   xlab("") + ylab("") + coord_cartesian(expand = c(0,0)) + 
   ggtitle(paste("Gameweek", max(all$event))) + coord_fixed(expand = c(0,0))
