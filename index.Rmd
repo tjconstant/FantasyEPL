@@ -201,7 +201,7 @@ Based on these probability distributions, and simulating 1000 different season o
 
 ```{r sim, echo = F, fig.height=2}
 season_model <- data.frame()
-N <- 1000
+N <- 2000
 
 #pb <- txtProgressBar(min = 0, max = N, initial = 0)
 
@@ -308,6 +308,18 @@ ggplot(result, aes(place, 1, colour = pct, fill = pct, label = label)) +
   ylab("") + theme(axis.text.y  = element_blank(), legend.position = "none",
                    axis.ticks.y = element_blank()) +
   scale_x_continuous(expand = c(0,1),breaks = (1:(n_managers)), labels = orindals[(1:(n_managers))])
+
+
+season_model$manager <- factor(season_model$manager, 
+                               levels = result$manager[order(result$pct[result$place == 1])])
+season_model %>% 
+  group_by(itr) %>% 
+  mutate(rank = rank(-final_score)) %>%
+  ggplot(aes(manager, rank, fill = manager)) + 
+  geom_violin(adjust = 3, alpha= 0.5, scale = "width") +
+  geom_boxplot(width = 0.1) +
+  coord_flip()
+
 ```
 
 #### Mini League Positions
