@@ -155,6 +155,6 @@ converge %>% ggplot(aes(`total iterations`, pct, colour  = player)) +
   geom_line(lwd = .9) + 
   ylab("Percent of Seasons Won") + 
   theme_bw() +
-  scale_colour_manual(values = c("#2780E3","#9954BB","#3FB618","#FF7518","#FF7518"))
+  scale_colour_manual(values = c("#2780E3","#9954BB","#3FB618","#FF7518", "#FF0039"))
 ```
 
