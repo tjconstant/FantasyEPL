@@ -1,0 +1,160 @@
+---
+title: "Monte Carlo Predictions for Fantasy Football"
+author: "Tom Constant"
+date: "9 March 2018"
+output:
+  html_document:
+    code_folding: hide
+    theme: cosmo
+    highlight: tango
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, error = FALSE, message = FALSE)
+```
+
+## Introduction
+
+This model predicts the number of seasons of Fantasy Football each player might be expected to win given their historic performance.
+
+The approach is to estimate each player's probability density function from the gameweeks so far completed, and to randomly sample this distribution to generate predicted gameweek scores from now until the end of the season.
+
+The total score for each player is then calculated and ranked for each simulated gameweek, and a percentage of seasons won is produced.
+
+For an appropriate number of season iterations, the predicted number of seasons won will 'converge' to the most probable outcome. Too few iterations, and random outlines could dominate the prediction. Too many will result in prohibitive CPU time, taking far too long to complete. See section 'convergence' for more details. 
+
+## Code & Dependancies
+
+This model is programmed in R, and uses `base` and `tidyverse` packages. It also relies on the undocumented API of the fantasy football website.
+
+```{r libs}
+library(tidyverse)
+library(jsonlite)
+library(knitr)
+```
+
+## Leagues
+
+The two leagues considered are the [Physics Fantasy Football](https://fantasy.premierleague.com/a/leagues/standings/682443/classic) league, and the [UoE Premiership](https://fantasy.premierleague.com/a/leagues/standings/203349/classic) league.
+
+```{r players}
+players <- c(378067,2938617,1309360,386429,376149)
+```
+
+## Iterations
+
+The number of seasons simulated is chosen to be 1024. See the section 'convergence' for more details. 
+
+```{r convergance}
+Ns <- 1024
+```
+
+## Model
+
+This [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) model is run 'hot', meaning that sampled scores for one gameweek effect the probability density function (PDF) for subsequent weeks.
+
+Currently, the PDFs are not weighted, although they probably should be to account for the most recent team activity being more likely to effect the subsequent week scores. 
+
+```{r model}
+for(N in Ns){ # convergance loop
+  
+  model <- list()
+  
+  for(player in players){
+    
+    data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/",player,"/history"), simplifyVector = T)
+    
+    total_points <- numeric(N)
+    
+    for(j in 1:N){ # season iteration loop
+      
+      points <- data$history$points
+      
+      for(i in (length(points)+1):38){ # remaining gameweek loop
+        
+        pdf <- density(points)#, weights = (1:length(points))/(length(points)))
+        points[i] <- sample(pdf$x, size = 1, replace = T, prob = pdf$y)
+        
+      }
+      
+      total_points[j] <- sum(points)
+      
+    }
+    
+    model[[paste(data$entry$player_first_name, data$entry$player_last_name)]] <- total_points
+    
+  }
+  
+  model <-
+    model %>% 
+    bind_rows() %>%
+    mutate(season_number = row_number()) %>%
+    gather(key = player, value = final_score, 1:5)
+  
+  rank_predictions <- 
+    model %>% 
+    group_by(season_number) %>% 
+    mutate(rank = rank(-final_score)) %>%
+    group_by(player, rank) %>%
+    summarise(n =  n(), pct = 100*n()/N) %>%
+    complete(player, fill = list(n = 0))
+  
+}
+
+```
+
+## Results & Predictions {.tabset .tabset-fade}
+
+The predicted number of seasons won out of `r Ns[1]` seasons are tabulated below for both leagues.
+
+### Physics Fantasy Football
+
+```{r first_place}
+rank_predictions %>%
+  filter(rank == 1) %>%
+  arrange(-pct) %>%
+  mutate(pct = pct %>% round(1) %>% paste0("%")) %>%
+  select(manager = player, `number of seasons won` = n, `percentage of seasons won` = pct) %>%
+  kable(align = c("l","r","r"))
+```
+
+### UoE Premiership
+
+```{r}
+players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945)
+<<convergance>>
+<<model>>
+<<first_place>>
+```
+
+## Convergance
+
+To ensure the model has converged to the most likely result, convergence checks are performed, increasing the number of seasons simulated until the model has reached a steady-state solution. In this example, we plot the total number of seasons simulated (total iterations) against the percentage of seasons won. Once little chance in the % of seasons won changes little between iterations, the model is said to be converged.
+
+```{r}
+converge <- tibble()
+
+for(i in 1:Ns){
+converge <- 
+  model %>% 
+    group_by(season_number) %>%
+    filter(season_number <= i) %>%
+    mutate(rank = rank(-final_score)) %>%
+    group_by(player, rank) %>%
+    summarise(n =  n(), pct = 100*n()/i) %>%
+    complete(player, fill = list(n = 0)) %>%
+    filter(rank == 1) %>%
+    arrange(-pct) %>%
+    mutate(`total iterations` = i) %>%
+    bind_rows(converge,.)
+}
+
+converge %>% ggplot(aes(total_iterations, pct, colour  = player)) + 
+  geom_line(lwd = .9) + 
+  ylab("Percent of Seasons Won") + 
+  theme_bw() +
+  scale_colour_manual(values = c("#2780E3","#9954BB","#3FB618","#FF7518","#FF7518"))
+```
+

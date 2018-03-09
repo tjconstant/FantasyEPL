@@ -193,6 +193,8 @@ ggplot(all, aes(gw_date, value.1/10, colour = name, fill = name, group = name)) 
 
 #### Point Distribution By Manager
 
+[For a detailed explanation, and results of a hot Monte Carlo simulation, click here](monte_carlo.html)
+
 ```{r dist, warning = FALSE, fig.height=3}
 ggplot(all, aes(points, fill = manager, group = manager))  + geom_density() + facet_wrap(~manager, ncol = 3) + coord_cartesian(expand = c(0,0)) + xlim(0,NA) + xlab("Gameweek Points")
 ```
@@ -455,6 +457,8 @@ all <- scrape(players)
 ```
 
 #### Point Distribution By Manager
+
+[For a detailed explanation, and results of a hot Monte Carlo simulation, click here](monte_carlo.html)
 
 ```{r fig.height = 6, warning = FALSE}
 <<dist>>
