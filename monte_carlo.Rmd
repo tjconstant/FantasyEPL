@@ -151,7 +151,7 @@ converge <-
     bind_rows(converge,.)
 }
 
-converge %>% ggplot(aes(total_iterations, pct, colour  = player)) + 
+converge %>% ggplot(aes(`total iterations`, pct, colour  = player)) + 
   geom_line(lwd = .9) + 
   ylab("Percent of Seasons Won") + 
   theme_bw() +

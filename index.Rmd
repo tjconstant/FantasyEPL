@@ -203,7 +203,7 @@ Based on these probability distributions, and simulating 1000 different season o
 
 ```{r sim, echo = F, fig.height=2}
 season_model <- data.frame()
-N <- 2000
+N <- 1000
 
 #pb <- txtProgressBar(min = 0, max = N, initial = 0)
 
