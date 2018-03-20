@@ -58,48 +58,56 @@ This [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) model is ru
 Currently, the PDFs are not weighted, although they probably should be to account for the most recent team activity being more likely to effect the subsequent week scores. 
 
 ```{r model}
+set.seed(1772)
+
 for(N in Ns){ # convergance loop
   
   model <- list()
+
+for(player in players){
   
-  for(player in players){
+  data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/", player ,"/history"), simplifyVector = T)
+  
+  total_points <- numeric(N)
+  
+  for(j in 1:N){ # season iteration loop
     
-    data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/",player,"/history"), simplifyVector = T)
+      points <- data$history$points - data$history$event_transfers_cost
+  
+      #pdf <- density(points) # cold simulation
     
-    total_points <- numeric(N)
-    
-    for(j in 1:N){ # season iteration loop
+    for(i in (length(points)+1):38){ # remaining gameweek loop
       
-      points <- data$history$points
+      pdf <- density(points) # hot simulation
       
-      for(i in (length(points)+1):38){ # remaining gameweek loop
-        
-        pdf <- density(points)#, weights = (1:length(points))/(length(points)))
-        points[i] <- sample(pdf$x, size = 1, replace = T, prob = pdf$y)
-        
-      }
-      
-      total_points[j] <- sum(points)
+      points[i] <- approx(
+        cumsum(pdf$y)/sum(pdf$y),
+        pdf$x,
+        runif(1)
+      )$y
       
     }
-    
-    model[[paste(data$entry$player_first_name, data$entry$player_last_name)]] <- total_points
+
+    total_points[j] <- sum(points)
     
   }
+  
+  model[[paste(data$entry$player_first_name, data$entry$player_last_name)]] <- total_points
+  
+}
   
   model <-
     model %>% 
     bind_rows() %>%
     mutate(season_number = row_number()) %>%
-    gather(key = player, value = final_score, 1:5)
+    gather(key = player, value = final_score, seq_along(players))
   
   rank_predictions <- 
     model %>% 
     group_by(season_number) %>% 
     mutate(rank = rank(-final_score)) %>%
     group_by(player, rank) %>%
-    summarise(n =  n(), pct = 100*n()/N) %>%
-    complete(player, fill = list(n = 0))
+    summarise(n =  n(), pct = 100*n()/N)
   
 }
 
