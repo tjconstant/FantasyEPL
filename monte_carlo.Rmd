@@ -48,7 +48,7 @@ players <- c(378067,2938617,1309360,386429,376149)
 The number of seasons simulated is chosen to be 1024. See the section 'convergence' for more details. 
 
 ```{r convergance}
-Ns <- 1024
+N <- 1024
 ```
 
 ## Model
@@ -58,11 +58,8 @@ This [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) model is ru
 Currently, the PDFs are not weighted, although they probably should be to account for the most recent team activity being more likely to effect the subsequent week scores. 
 
 ```{r model}
-set.seed(1772)
 
-for(N in Ns){ # convergance loop
-  
-  model <- list()
+model <- list()
 
 for(player in players){
   
@@ -108,14 +105,12 @@ for(player in players){
     mutate(rank = rank(-final_score)) %>%
     group_by(player, rank) %>%
     summarise(n =  n(), pct = 100*n()/N)
-  
-}
 
 ```
 
 ## Results & Predictions {.tabset .tabset-fade}
 
-The predicted number of seasons won out of `r Ns[1]` seasons are tabulated below for both leagues.
+The predicted number of seasons won out of `r N` seasons are tabulated below for both leagues.
 
 ### Physics Fantasy Football
 
@@ -141,10 +136,10 @@ players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 
 
 To ensure the model has converged to the most likely result, convergence checks are performed, increasing the number of seasons simulated until the model has reached a steady-state solution. In this example, we plot the total number of seasons simulated (total iterations) against the percentage of seasons won. Once little chance in the % of seasons won changes little between iterations, the model is said to be converged.
 
-```{r}
+```{r convergance-check}
 converge <- tibble()
 
-for(i in 1:Ns){
+for(i in 1:N){
 converge <- 
   model %>% 
     group_by(season_number) %>%
@@ -166,3 +161,6 @@ converge %>% ggplot(aes(`total iterations`, pct, colour  = player)) +
   scale_colour_manual(values = c("#2780E3","#9954BB","#3FB618","#FF7518", "#FF0039", "black", "pink"))
 ```
 
+
+----------
+_last updated:_ _`r Sys.time()`_
