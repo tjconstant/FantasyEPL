@@ -132,11 +132,11 @@ players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 
 <<first_place>>
 ```
 
-## Convergance
+## Convergence
 
 To ensure the model has converged to the most likely result, convergence checks are performed, increasing the number of seasons simulated until the model has reached a steady-state solution. In this example, we plot the total number of seasons simulated (total iterations) against the percentage of seasons won. Once little chance in the % of seasons won changes little between iterations, the model is said to be converged.
 
-```{r convergance-check}
+```{r convergence-check}
 converge <- tibble()
 
 for(i in 1:N){
