@@ -123,15 +123,6 @@ rank_predictions %>%
   kable(align = c("l","r","r"))
 ```
 
-### UoE Premiership
-
-```{r}
-players <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945)
-<<convergance>>
-<<model>>
-<<first_place>>
-```
-
 ## Convergence
 
 To ensure the model has converged to the most likely result, convergence checks are performed, increasing the number of seasons simulated until the model has reached a steady-state solution. In this example, we plot the total number of seasons simulated (total iterations) against the percentage of seasons won. Once little chance in the % of seasons won changes little between iterations, the model is said to be converged.
