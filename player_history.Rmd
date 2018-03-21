@@ -1,0 +1,23 @@
+---
+output: 
+  html_document: 
+    self_contained: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE}
+images <- dir(pattern = ".svg", "player_history/", full.names =  T)
+names <- sub(pattern = ".svg", replacement = "", x = dir("player_history/"))
+```
+
+# Team History {.tabset .tabset-fade .tabset-pills}
+
+Players who played over 60 minutes in green. Top left number is points scored, bottom right number is goals scored.
+
+
+```{r, results='asis', echo = FALSE, out.width="2000px"}
+cat(paste0("\n## ",names,"\n\n![](",images,")\n\n"))
+```
