@@ -40,7 +40,7 @@ library(knitr)
 The two leagues considered are the [Physics Fantasy Football](https://fantasy.premierleague.com/a/leagues/standings/682443/classic) league, and the [UoE Premiership](https://fantasy.premierleague.com/a/leagues/standings/203349/classic) league.
 
 ```{r players}
-players_physcis <- c(378067,2938617,1309360,386429,376149)
+players_physics <- c(378067,2938617,1309360,386429,376149)
 players_uoe <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945) 
 ```
 
@@ -146,7 +146,7 @@ The predicted number of seasons won out of `r N` seasons are tabulated below for
 ### Physics Fantasy Football
 
 ```{r physics_model}
-physics <- monte_carlo(players_physcis, N)
+physics <- monte_carlo(players_physics, N)
 ```
 
 #### Overall Winner
