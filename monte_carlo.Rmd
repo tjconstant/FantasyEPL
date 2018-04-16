@@ -40,15 +40,16 @@ library(knitr)
 The two leagues considered are the [Physics Fantasy Football](https://fantasy.premierleague.com/a/leagues/standings/682443/classic) league, and the [UoE Premiership](https://fantasy.premierleague.com/a/leagues/standings/203349/classic) league.
 
 ```{r players}
-players <- c(378067,2938617,1309360,386429,376149)
+players_physcis <- c(378067,2938617,1309360,386429,376149)
+players_uoe <- c(386429, 1324461, 378067, 843758, 373089, 2268116, 656073, 1878698, 3605945) 
 ```
 
 ## Iterations
 
-The number of seasons simulated is chosen to be 1024. See the section 'convergence' for more details. 
+The number of seasons simulated is chosen to be 500. See the section 'convergence' for more details. 
 
 ```{r convergance}
-N <- 1024
+N <- 500
 ```
 
 ## Model
@@ -59,39 +60,47 @@ Currently, the PDFs are not weighted, although they probably should be to accoun
 
 ```{r model}
 
-model <- list()
-
-for(player in players){
+monte_carlo <- function(players, seasons = N){
   
-  data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/", player ,"/history"), simplifyVector = T)
+  N <- seasons
   
-  total_points <- numeric(N)
+  model <- list()
   
-  for(j in 1:N){ # season iteration loop
+  for(player in players){
     
+    data <- list(history = list(points  = NA))
+    
+    while(any(is.na(data$history$points))){
+          data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/", player ,"/history"), simplifyVector = T)
+    }
+    
+    total_points <- numeric(N)
+    
+    for(j in 1:N){ # season iteration loop
+      
       points <- data$history$points - data$history$event_transfers_cost
-  
+      
       #pdf <- density(points) # cold simulation
-    
-    for(i in (length(points)+1):38){ # remaining gameweek loop
       
-      pdf <- density(points) # hot simulation
+      for(i in (length(points)+1):38){ # remaining gameweek loop
+        
+        pdf <- density(points) # hot simulation
+        
+        points[i] <- approx(
+          cumsum(pdf$y)/sum(pdf$y),
+          pdf$x,
+          runif(1)
+        )$y
+        
+      }
       
-      points[i] <- approx(
-        cumsum(pdf$y)/sum(pdf$y),
-        pdf$x,
-        runif(1)
-      )$y
+      total_points[j] <- sum(points)
       
     }
-
-    total_points[j] <- sum(points)
+    
+    model[[paste(data$entry$player_first_name, data$entry$player_last_name)]] <- total_points
     
   }
-  
-  model[[paste(data$entry$player_first_name, data$entry$player_last_name)]] <- total_points
-  
-}
   
   model <-
     model %>% 
@@ -105,6 +114,28 @@ for(player in players){
     mutate(rank = rank(-final_score)) %>%
     group_by(player, rank) %>%
     summarise(n =  n(), pct = 100*n()/N)
+  
+  first_place <- 
+    rank_predictions %>%
+    filter(rank == 1) %>%
+    arrange(-pct) %>%
+    mutate(pct = pct %>% round(1) %>% paste0("%")) %>%
+    select(manager = player, `number of seasons won` = n, `percentage of seasons won` = pct) %>%
+    kable(align = c("l","r","r"))
+  
+  second_place <- 
+    rank_predictions %>%
+    filter(rank == 2) %>%
+    arrange(-pct) %>%
+    mutate(pct = pct %>% round(1) %>% paste0("%")) %>%
+    select(manager = player, `number of seasons finshed 2nd` = n, `percentage of seasons finished 2nd` = pct) %>%
+    kable(align = c("l","r","r"))
+  
+  return(list(model = model, 
+              rank_predictions = rank_predictions, 
+              first_place = first_place,
+              second_place = second_place))
+}
 
 ```
 
@@ -114,25 +145,39 @@ The predicted number of seasons won out of `r N` seasons are tabulated below for
 
 ### Physics Fantasy Football
 
-```{r first_place}
-rank_predictions %>%
-  filter(rank == 1) %>%
-  arrange(-pct) %>%
-  mutate(pct = pct %>% round(1) %>% paste0("%")) %>%
-  select(manager = player, `number of seasons won` = n, `percentage of seasons won` = pct) %>%
-  kable(align = c("l","r","r"))
+```{r physics_model}
+physics <- monte_carlo(players_physcis, N)
 ```
+
+#### Overall Winner
+
+```{r first_place_phys}
+physics$first_place
+```
+
+### UoE Premiership
+
+```{r first_place_uoe}
+uoe <- monte_carlo(players_uoe, N)
+```
+
+#### Overall Winner
+
+```{r}
+uoe$first_place
+```
+
 
 ## Convergence
 
 To ensure the model has converged to the most likely result, convergence checks are performed, increasing the number of seasons simulated until the model has reached a steady-state solution. In this example, we plot the total number of seasons simulated (total iterations) against the percentage of seasons won. Once little chance in the % of seasons won changes little between iterations, the model is said to be converged.
 
-```{r convergence-check}
+```{r convergence-check, eval=TRUE}
 converge <- tibble()
 
 for(i in 1:N){
 converge <- 
-  model %>% 
+  physics$model %>% 
     group_by(season_number) %>%
     filter(season_number <= i) %>%
     mutate(rank = rank(-final_score)) %>%
