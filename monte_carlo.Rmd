@@ -70,7 +70,7 @@ monte_carlo <- function(players, seasons = N){
     
     data <- list(history = list(points  = NA))
     
-    while(any(is.na(data$history$points))){
+    while(any(is.na(data$history$points)) | any(is.na(data$history$event_transfers_cost))){
           data <- read_json(paste0("https://fantasy.premierleague.com/drf/entry/", player ,"/history"), simplifyVector = T)
     }
     
