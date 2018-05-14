@@ -1,8 +1,10 @@
 ---
 output:
   html_document:
+    css: assets/css/fontawesome-all.css
+    self_contained: no
     theme: cosmo
-    css: https://use.fontawesome.com/releases/v5.0.13/css/all.css
+    lib_dir: assets
 ---
 
 # The Fantasy Football Stats Page
