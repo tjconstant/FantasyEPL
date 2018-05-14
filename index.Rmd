@@ -2,14 +2,15 @@
 output:
   html_document:
     theme: cosmo
+    css: https://use.fontawesome.com/releases/v5.0.13/css/all.css
 ---
+
 
 # The Fantasy Football Stats Page
 
 -------------------------------------
 
 ```{r setup, include=FALSE}
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
