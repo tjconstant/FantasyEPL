@@ -1,0 +1,38 @@
+---
+output:
+  html_document:
+    theme: cosmo
+---
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+# The Fantasy Football Stats Page
+
+-------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Archive Notice
+
+The Fantasy Football season has now ended, and the stats and simulation pages have been archived.
+
+* For the final gameweek (38) stats pages you can **[<i class ="fas fa-futbol"></i> click here](site_archive/index.html).**
+
+* For the last Monte Carlo simulation (GW37) you can **[<i class ="fas fa-chart-line"></i> click here](site_archive/monte_carlo.html).**
+
+* To download the final datasets scraped from the fantasy football site in CSV format, **[<i class ="fas fa-download"></i> click here](data/data.zip).**
+
+### Feedback
+
+For feedback, requests or suggestions for the next season of fantasy football, please visit the project's **[<i class ="fab fa-github"></i> github repository](https://github.com/tjconstant/FantasyEPL)**, and submit an issue.
+
+### Blog
+
+There will be some upcoming blog posts of post-season analysis, including the effectiveness of the Monte Carlo method of predicting the winners. These will be posted at **[<i class ="fas fa-user"></i> tjconstant.com](http://tjconstant.com)**.
+
+<br>
+
+<div align = "center"  style="color:lightgrey"><i class ="fas fa-futbol"> Tom Constant, 2018</i></div>
+
