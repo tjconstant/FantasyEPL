@@ -1,0 +1,137 @@
+---
+title: "Using a Monte Carlo method to predict Fantasy Football Scores"
+author: "Tom Constant"
+date: "16 May 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+```{r libs}
+library(tidyverse)
+library(knitr)
+```
+
+## The Model
+
+```{r model}
+
+monte_carlo <- function(player_file, N = 500, start_week = "current"){
+  
+  data <- read_csv(player_file, col_types = cols())
+  
+  if(start_week == "current") start_week <- length(data$points[data$id==data$id[1]])+1
+  
+  model <- list()
+  
+  for(player in unique(data$id)){
+    
+    data_loop <- data[data$id == player,]
+    
+    total_points <- numeric(N)
+    
+    points <- data_loop$points - data_loop$event_transfers_cost.1
+    points <- points[(1:(start_week-1))]
+    
+    for(j in 1:N){ # season iteration loop
+      
+      for(i in (start_week:39)){ # remaining gameweek loop
+        
+        pdf <- density(points)
+        
+        points[i] <- approx(
+          cumsum(pdf$y)/sum(pdf$y),
+          pdf$x,
+          runif(1), 
+          rule = 2
+        )$y
+        
+      }
+      
+      points <- points[1:38]
+      
+      total_points[j] <- sum(points)
+      
+    }
+    
+    model[[paste(data_loop$player_first_name, data_loop$player_last_name)[1]]] <- total_points
+    
+  }
+  
+  model <-
+    model %>% 
+    bind_rows() %>%
+    mutate(season_number = row_number()) %>%
+    gather(key = player, value = final_score, seq_along(unique(data$id)))
+  
+  rank_predictions <- 
+    model %>% 
+    group_by(season_number) %>% 
+    mutate(rank = rank(-final_score)) %>%
+    group_by(player, rank) %>%
+    summarise(n =  n(), pct = 100*n()/N)
+  
+  place <- list()
+  
+  for(i in 1:length(unique(data$id))){
+    place[[i]] <- 
+      rank_predictions %>%
+      filter(rank == i) %>%
+      arrange(-pct) %>%
+      #mutate(pct = pct %>% round(1) %>% paste0("%")) %>%
+      select(manager = player, `number of seasons won` = n, `percentage of seasons won` = pct)
+  }
+  
+  return(list(model = model, 
+              rank_predictions = rank_predictions, 
+              place = place))
+}
+
+```
+
+
+```{r week_by_week}
+
+week_by_week_1st_place <- function(player_file){
+  
+  set.seed(123)
+  
+  results <- list()
+  
+  for (i in 3:38){
+    results[[i]] <- monte_carlo(player_file, N = 500, start_week = i)$place[[1]]
+  }
+  
+  p <- 
+  results %>%
+    bind_rows(.id = "gameweek") %>%
+    mutate(gameweek = (gameweek %>% as.integer()) + 2) %>%
+    ggplot(aes(x = gameweek, 
+               y = `percentage of seasons won`, 
+               group = manager, 
+               colour = manager)) + 
+    geom_line() + 
+    geom_point() +
+    theme_bw()
+  
+  return(p)
+}
+
+```
+
+```{r physics}
+
+week_by_week_1st_place("../data/history_Physics-Fantasy-Football.csv")
+
+```
+
+```{r uoe}
+
+week_by_week_1st_place("../data/history_UoE-Premiership.csv")
+
+```
+
+
+
