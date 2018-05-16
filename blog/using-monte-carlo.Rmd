@@ -101,11 +101,11 @@ week_by_week_1st_place <- function(player_file){
   results <- list()
   
   for (i in 3:38){
-    results[[i]] <- monte_carlo(player_file, N = 500, start_week = i)$place[[1]]
+    results[[i]] <- monte_carlo(player_file, N = 5, start_week = i)
   }
   
   p <- 
-  results %>%
+  lapply(lapply(results, function(x) x[[3]]), function(x) x[[1]]) %>%
     bind_rows(.id = "gameweek") %>%
     mutate(gameweek = (gameweek %>% as.integer()) + 2) %>%
     ggplot(aes(x = gameweek, 
@@ -116,7 +116,9 @@ week_by_week_1st_place <- function(player_file){
     geom_point() +
     theme_bw()
   
-  return(p)
+  p
+  
+  invisible(results)
 }
 
 ```
