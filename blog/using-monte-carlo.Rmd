@@ -71,12 +71,16 @@ monte_carlo <- function(player_file, N = 500, start_week = "current"){
     mutate(season_number = row_number()) %>%
     gather(key = player, value = final_score, seq_along(unique(data$id)))
   
-  rank_predictions <- 
-    model %>% 
-    group_by(season_number) %>% 
-    mutate(rank = rank(-final_score)) %>%
-    group_by(player, rank) %>%
-    summarise(n =  n(), pct = 100*n()/N)
+
+rank_predictions <- 
+  model %>% 
+  group_by(season_number) %>% 
+  mutate(rank = rank(-final_score)) %>%
+  group_by(player, rank) %>%
+  tally() %>% 
+  ungroup() %>% 
+  complete(player, rank, fill = list(n = 0)) %>%
+  mutate(pct = 100*n/N)
   
   place <- list()
   
@@ -119,6 +123,7 @@ week_by_week_1st_place <- function(player_file){
                colour = manager)) + 
     geom_line() + 
     geom_point() +
+    #geom_area(aes(fill = manager), position = "fill", col = 1)+
     theme_bw()
   
   print(p1)
