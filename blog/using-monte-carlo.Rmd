@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r libs}
@@ -44,9 +44,14 @@ monte_carlo <- function(player_file, N = 500, start_week = "current"){
         points[i] <- approx(
           cumsum(pdf$y)/sum(pdf$y),
           pdf$x,
-          runif(1), 
+          runif(1),
+          yleft = min(data$points - data$event_transfers_cost.1),
+          yright = max(data$points - data$event_transfers_cost.1),
           rule = 2
         )$y
+        
+        if(points[i]< min(data$points - data$event_transfers_cost.1)) points[i] <- min(data$points - data$event_transfers_cost.1)
+        if(points[i]>max(data$points - data$event_transfers_cost.1)) points[i] <- max(data$points - data$event_transfers_cost.1)
         
       }
       
@@ -101,7 +106,7 @@ week_by_week_1st_place <- function(player_file){
   results <- list()
   
   for (i in 3:38){
-    results[[i]] <- monte_carlo(player_file, N = 5, start_week = i)
+    results[[i]] <- monte_carlo(player_file, N = 500, start_week = i)
   }
   
   p1 <- 
@@ -123,9 +128,10 @@ week_by_week_1st_place <- function(player_file){
     bind_rows(.id = "gameweek") %>%
     mutate(gameweek = (gameweek %>% as.integer()) + 2) %>%
     ggplot(aes(x = gameweek, y = final_score, fill= player)) + 
-    stat_summary(geom = "ribbon", alpha=0.25) + 
+    stat_summary(geom = "ribbon", alpha = 0.025, fun.y = mean, fun.ymax = max, fun.ymin = min) + 
     theme_bw() + 
-    stat_summary(aes(colour = player), geom="line", lwd=1.5) +
+    geom_jitter(aes(colour = player), alpha = 0.025/5) +
+    stat_summary(aes(colour = player), geom="line", lwd = 1.25) +
     ylab("final predicted score")
   
   print(p2)
@@ -136,15 +142,11 @@ week_by_week_1st_place <- function(player_file){
 ```
 
 ```{r physics}
-
-week_by_week_1st_place("../data/history_Physics-Fantasy-Football.csv")
-
+week_by_week_1st_place("../data/history_Physics-Fantasy-Football.csv") 
 ```
 
 ```{r uoe}
-
-week_by_week_1st_place("../data/history_UoE-Premiership.csv")
-
+week_by_week_1st_place("../data/history_UoE-Premiership.csv") 
 ```
 
 
