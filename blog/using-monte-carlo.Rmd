@@ -147,11 +147,56 @@ week_by_week_1st_place <- function(player_file){
 ```
 
 ```{r physics}
-week_by_week_1st_place("../data/history_Physics-Fantasy-Football.csv") 
+result_phys <- week_by_week_1st_place("../data/history_Physics-Fantasy-Football.csv") 
+```
+
+```{r}
+
+fs <- data.frame(player = c("Tom Constant", "Ben Tremain", "Ian Hooper", "Tom Graham", "Gareth Ward"), actual_final_score = c(2165, 2302, 2154, 2167, 2014))
+  
+p2 <-
+  lapply(result_phys, function(x) x[[1]]) %>%
+    bind_rows(.id = "gameweek") %>%
+    mutate(gameweek = (gameweek %>% as.integer()) + 2) %>%
+    full_join(fs)
+
+p2 %>%
+  group_by(player, gameweek) %>%
+  mutate(diff = final_score-actual_final_score) %>%
+  summarise(avg = mean(diff)) %>%
+  ggplot(aes(gameweek, avg, colour = player)) + 
+  geom_line() + 
+  geom_point() + 
+  theme_bw() + ylab("prediction error (absolute)")
+
 ```
 
 ```{r uoe}
-week_by_week_1st_place("../data/history_UoE-Premiership.csv") 
+result_uoe <- week_by_week_1st_place("../data/history_UoE-Premiership.csv") 
+```
+
+```{r}
+```{r}
+
+fs <- data.frame(player = c("Corinne Greaves", "Ben Tremain", "John Greaves", "Tom Constant", "Jon Vague", "James Westwood", "Nicholas Taylor", "Tim Leveridge", "Richard King"), actual_final_score = c(2323,2302,2193,2165,2134,2047,1928,1868,1649))
+  
+p2 <-
+  lapply(result_uoe, function(x) x[[1]]) %>%
+    bind_rows(.id = "gameweek") %>%
+    mutate(gameweek = (gameweek %>% as.integer()) + 2) %>%
+    full_join(fs)
+
+p2 %>%
+  group_by(player, gameweek) %>%
+  mutate(diff = final_score-actual_final_score) %>%
+  summarise(avg = mean(diff)) %>%
+  ggplot(aes(gameweek, avg, colour = player)) + 
+  geom_line() + 
+  geom_point() + 
+  theme_bw() + ylab("prediction error (absolute)")
+
+```
+
 ```
 
 
