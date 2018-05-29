@@ -1,0 +1,555 @@
+<html>
+
+<head>
+<style type="text/css">.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}</style>
+<title>Fantasy Football 2013/14 Stats</title>
+
+<style type="text/css">
+
+body
+{
+font-family:'HelveticaNeue-Light','Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#5A5A5A;
+letter-spacing:1px;
+text-align:center;
+}
+a{
+color:#5A5A5A;
+}
+
+h1 
+{
+font-family:'HelveticaNeue-Light','Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:51px;
+font-weight:normal;
+font-style:normal;
+text-align:center;
+}
+
+h2
+{
+font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:18px;
+font-weight:normal;
+font-style:normal;
+text-align:center;
+}
+
+div {
+}
+
+#graph
+{
+position:relative;
+left:50px;
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Fantasy Football 2013/14 Stats Page</h1>
+<h2>Last updated: <code class="knitr inline">Mon Jan 06 08:17:02 2014</code></h2>
+
+
+
+
+
+<!---<p>The most popular players in the Champions League & Stormgurads Classic this gameweek:</p>---!>
+
+
+ 
+<p>Sadly, the premier league website is currently having difficulties. Only a reduced-service for statistics is avalible today</p>
+
+<h1>The Champions League</h1>
+<center>
+<!-- Table generated in R 3.0.1 by googleVis 0.4.5 package -->
+<!-- Mon Jan 06 08:17:08 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTableID8b8728e72dc () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "St Hubbins XI",
+20,
+59,
+107694,
+0,
+0,
+102.5,
+null,
+299031,
+"" 
+],
+[
+ "Runners Up...",
+20,
+58,
+144615,
+1,
+0,
+110,
+null,
+116658,
+"" 
+],
+[
+ "Your Mum's Athletic",
+20,
+48,
+722004,
+2,
+4,
+107.4,
+null,
+1009299,
+"" 
+],
+[
+ "Moves Like Agger",
+20,
+34,
+2151955,
+0,
+0,
+102.3,
+null,
+1047042,
+"" 
+],
+[
+ "Constorm FC",
+20,
+50,
+553355,
+2,
+0,
+104.6,
+null,
+475765,
+"" 
+],
+[
+ "Shakhtar Senseless",
+20,
+57,
+186449,
+3,
+8,
+109.6,
+null,
+311846,
+"" 
+],
+[
+ "ShayGivenNotStirred",
+20,
+39,
+1618431,
+0,
+0,
+105.9,
+null,
+421412,
+"" 
+],
+[
+ "Mutant Ninja Skrtls",
+20,
+48,
+702438,
+1,
+0,
+109.3,
+null,
+539676,
+"" 
+],
+[
+ "Gareth's Grandslam",
+20,
+40,
+1597396,
+2,
+0,
+99.4,
+null,
+716611,
+"" 
+] 
+];
+data.addColumn('string','Team');
+data.addColumn('number','GW');
+data.addColumn('number','GP');
+data.addColumn('number','GR');
+data.addColumn('number','TM');
+data.addColumn('number','TC');
+data.addColumn('number','TV');
+data.addColumn('number','OP');
+data.addColumn('number','OR');
+data.addColumn('string','Var.10');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTableID8b8728e72dc() {
+var data = gvisDataTableID8b8728e72dc();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    540;
+options["height"] =    250;
+options["sortColumn"] =      7;
+options["sortAscending"] = false;
+
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID8b8728e72dc')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID8b8728e72dc);
+})();
+function displayChartTableID8b8728e72dc() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID8b8728e72dc"></script>
+ 
+<!-- divChart -->
+  
+<div id="TableID8b8728e72dc"
+  style="width: 540px; height: 250px;">
+</div>
+
+
+</center>
+
+<a href="presentation.html">Click Here for Presentation Version</a>
+<div id="graph">
+<div class="chunk" id="CumGraph-CL"><div class="rimage default"><img src="figure/CumGraph-CL.png" title="plot of chunk CumGraph-CL" alt="plot of chunk CumGraph-CL" class="plot" /></div></div>
+
+
+<div class="chunk" id="CumGraph-CL-Extrap"><div class="rimage default"><img src="figure/CumGraph-CL-Extrap.png" title="plot of chunk CumGraph-CL-Extrap" alt="plot of chunk CumGraph-CL-Extrap" class="plot" /></div></div>
+
+
+<div class="chunk" id="CumGraph-CL-Extrap-RF"><div class="rimage default"><img src="figure/CumGraph-CL-Extrap-RF.png" title="plot of chunk CumGraph-CL-Extrap-RF" alt="plot of chunk CumGraph-CL-Extrap-RF" class="plot" /></div></div>
+
+
+<div class="chunk" id="TVGraph-CL"><div class="rimage default"><img src="figure/TVGraph-CL.png" title="plot of chunk TVGraph-CL" alt="plot of chunk TVGraph-CL" class="plot" /></div></div>
+
+
+<div class="chunk" id="Density-CL"><div class="rimage default"><img src="figure/Density-CL.png" title="plot of chunk Density-CL" alt="plot of chunk Density-CL" class="plot" /></div></div>
+
+
+
+
+
+</div>
+
+<h1>The Stormguards Classic</h1>
+
+<center>
+<!-- Table generated in R 3.0.1 by googleVis 0.4.5 package -->
+<!-- Mon Jan 06 08:17:13 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTableID8b87ff9ce8 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "HaleStorm United",
+20,
+30,
+2491349,
+0,
+0,
+100.2,
+951,
+1522614,
+"" 
+],
+[
+ "DaleStorm's troopers",
+20,
+42,
+1271439,
+0,
+0,
+96.8,
+778,
+2483918,
+"" 
+],
+[
+ "Hubbard Hammers",
+20,
+39,
+1618431,
+0,
+0,
+98,
+802,
+2371392,
+"" 
+],
+[
+ "Constorm FC",
+20,
+50,
+553355,
+2,
+0,
+104.6,
+null,
+475765,
+"" 
+],
+[
+ "Holmestorm",
+20,
+39,
+1618431,
+0,
+0,
+96.3,
+846,
+2130768,
+"" 
+],
+[
+ "......... (Graham)",
+20,
+41,
+1481639,
+2,
+0,
+101.4,
+964,
+1443109,
+"" 
+] 
+];
+data.addColumn('string','Team');
+data.addColumn('number','GW');
+data.addColumn('number','GP');
+data.addColumn('number','GR');
+data.addColumn('number','TM');
+data.addColumn('number','TC');
+data.addColumn('number','TV');
+data.addColumn('number','OP');
+data.addColumn('number','OR');
+data.addColumn('string','Var.10');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTableID8b87ff9ce8() {
+var data = gvisDataTableID8b87ff9ce8();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    540;
+options["height"] =    250;
+options["sortColumn"] =      7;
+options["sortAscending"] = false;
+
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID8b87ff9ce8')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID8b87ff9ce8);
+})();
+function displayChartTableID8b87ff9ce8() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID8b87ff9ce8"></script>
+ 
+<!-- divChart -->
+  
+<div id="TableID8b87ff9ce8"
+  style="width: 540px; height: 250px;">
+</div>
+
+
+</center>
+
+<div id="graph">
+<div class="chunk" id="CumGraph-SC"><div class="rimage default"><img src="figure/CumGraph-SC.png" title="plot of chunk CumGraph-SC" alt="plot of chunk CumGraph-SC" class="plot" /></div></div>
+
+
+<div class="chunk" id="CumGraph-SGC-Extrap"><div class="rimage default"><img src="figure/CumGraph-SGC-Extrap.png" title="plot of chunk CumGraph-SGC-Extrap" alt="plot of chunk CumGraph-SGC-Extrap" class="plot" /></div></div>
+
+
+<div class="chunk" id="TVGraph-SC"><div class="rimage default"><img src="figure/TVGraph-SC.png" title="plot of chunk TVGraph-SC" alt="plot of chunk TVGraph-SC" class="plot" /></div></div>
+
+
+<div class="chunk" id="Density-SC"><div class="rimage default"><img src="figure/Density-SC.png" title="plot of chunk Density-SC" alt="plot of chunk Density-SC" class="plot" /></div></div>
+
+
+
+
+</div>
+
+
+
+Note: This does not include formation limitations.
+
+
+</body>
+</html>

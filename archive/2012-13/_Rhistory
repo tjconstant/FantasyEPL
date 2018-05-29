@@ -1,0 +1,512 @@
+dens+geom_density(alpha=0.5)+facet_grid(names~.)+ggtitle("Probability Density (Last 5 Games)")
+highest<-c()
+for(i in 1:max(x)){
+highest<-c(highest,(as.character((subset(ggmain,week==i)$names[
+which(subset(ggmain,week==i)$gwpoints==max(subset(ggmain,week==i)$gwpoints))]))))
+}
+qplot(highest,xlab="name",ylab="gameweek wins")+theme_bw()+ggtitle("Golden Boot")
+lowest<-c()
+for(i in 1:max(x)){
+lowest<-c(lowest,(as.character((subset(ggmain,week==i)$names[
+which(subset(ggmain,week==i)$gwpoints==min(subset(ggmain,week==i)$gwpoints))]))))
+}
+qplot(lowest,xlab="name",ylab="gameweek losses")+theme_bw()+ggtitle("Wooden Boot")
+source('~/.active-rstudio-document', echo=TRUE)
+cump<-ggplot(ggmain,aes(week,cumpoints,colour=names,fill=names))+theme_bw()
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/37/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+library(XML)
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/37/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+team.constorm
+data.frame(a=)
+data.frame(a=.)
+players<-data.frame(team="constorm",week=rep(37,15),players=team.constorm$    P    )
+players<-data.frame(team=rep("constorm",15),week=rep(37,15),players=team.constorm$    P    )
+team.constorm
+team.constorm$    P
+team.constorm$P
+team.constorm[,1]
+players<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1])
+)
+players
+players<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1]))
+players
+combine
+merge
+?merge
+source('~/.active-rstudio-document', echo=TRUE)
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/36/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+players<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1]))
+players
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/37/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/1/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/3/"
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+players<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1]))
+players
+theurl <- "http://fantasy.premierleague.com/entry/2259832/event-history/3/"
+theurl <- paste("http://fantasy.premierleague.com/entry/2259832/event-history/",i,"/",sep="")
+theurl
+source('~/.active-rstudio-document', echo=TRUE)
+players < - data.frame(t(rep(NA,3)))
+players <- data.frame(t(rep(NA,3)))
+names(players) <- c("team","week","players")
+players <- players[-1,]
+merge(players,players.week)
+players.week<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1]))
+merge(players,players.week)
+i<-37
+theurl <- theurl <- paste("http://fantasy.premierleague.com/entry/2259832/event-history/",i,"/",sep="")
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+players.week<-data.frame(team=rep("constorm",15),week=rep(37,15),players=as.character(team.constorm[,1]))
+merge(players,players.week)
+players
+players.week
+cbind(players,players.week)
+rbind(players,players.week)
+players<-rbind(players,players.week)
+source('~/.active-rstudio-document', echo=TRUE)
+players
+source('~/.active-rstudio-document', echo=TRUE)
+reload.data<-F
+library(ggplot2)
+qplot(players$players)
+source('~/.active-rstudio-document', echo=TRUE)
+team.names
+players
+j<-1
+team.names$name[j]
+as.character(team.names$name[j])
+theurl <- theurl <- paste("http://fantasy.premierleague.com/entry/",as.character(team.names$name[j]),"/event-history/",i,"/",sep="")
+theurl <- paste("http://fantasy.premierleague.com/entry/",as.character(team.names$name[j]),"/event-history/",i,"/",sep="")
+theurl
+theurl <- paste("http://fantasy.premierleague.com/entry/",as.character(team.names$number[j]),"/event-history/",i,"/",sep="")
+theurl
+team.constorm <- readHTMLTable(theurl,header=T,which=1)
+players.week<-data.frame(team=rep(team.names$name[j],15),week=rep(i,15),players=as.character(team.week[,1]))
+team.week <- readHTMLTable(theurl,header=T,which=1)
+players.week<-data.frame(team=rep(team.names$name[j],15),week=rep(i,15),players=as.character(team.week[,1]))
+players
+players<-rbind(players,players.week)
+players
+team.week
+source('~/.active-rstudio-document', echo=TRUE)
+theurl <- paste("http://fantasy.premierleague.com/entry/",as.character(team.names$number[j]),"/event-history/",i,"/",sep="")
+team.week <- readHTMLTable(theurl,header=T,which=1)
+theurkl
+theurl
+team.names
+source('~/.active-rstudio-document', echo=TRUE)
+players
+j
+source('~/.active-rstudio-document', echo=TRUE)
+players
+team.week
+players
+qplot(players$players)
+team.week <- readHTMLTable(theurl,header=T,which=1)
+players.week<-data.frame(team=rep(team.names$name[j],15),week=rep(i,15),players=as.character(team.week[,1]))
+players<-rbind(players,players.week)
+source('~/.active-rstudio-document', echo=TRUE)
+theurl
+team.week <- readHTMLTable(theurl,header=T,which=1)
+players.week<-data.frame(team=rep(team.names$name[j],15),week=rep(i,15),players=as.character(team.week[,1]))
+players<-rbind(players,players.week)
+unique(players)
+unique(players$team)
+p<-ggplot(players,aes(week,players,color=team))
+p+geom_point()
+subset(players,week==1)
+subset(players,week==3)
+subset(players,week==3)$players
+unique(subset(players,week==3)$players)
+length(unique(subset(players,week==3)$players))
+length((subset(players,week==3)$players))
+length(unique(subset(players,week==3)$players))
+for(i in 3:37){
+length(unique(subset(players,week==i)$players))
+}
+length(unique(subset(players,week==i)$players))
+playercount <- data.frame(t(rep(NA,2)))
+names(playercount) <- c("week","unique players")
+playercount <- playercount[-1,]
+playercount<-rbind(playercount,length(unique(subset(players,week==i)$players)))
+for(i in 3:37){
+playercount<-rbind(playercount,length(unique(subset(players,week==i)$players)))
+}
+p<-ggplot(playercount,aes(week,unique_players))
+p+geom_point()
+playecount
+playercount
+playercount<-rbind(playercount,data.frame(week=i,unique_players=length(unique(subset(players,week==i)$players))))
+playercount <- data.frame(t(rep(NA,2)))
+names(playercount) <- c("week","unique_players")
+playercount <- playercount[-1,]
+for(i in 3:37){
+playercount<-rbind(playercount,data.frame(week=i,unique_players=length(unique(subset(players,week==i)$players))))
+}
+library(ggplot2)
+p<-ggplot(playercount,aes(week,unique_players))
+p+geom_point()
+player_count
+playercount
+p+geom_point()+geom_smooth()
+(i<3 & j==8)
+!(i<3 & j==8)
+source('~/.active-rstudio-document', echo=TRUE)
+p+geom_point()+geom_smooth()+theme_bw()
+team.week
+team.week$GW
+team.week$MP
+names(team.week)
+team.week[,2]
+team.week[,3]
+team.week
+team.week[,16]
+source('~/.active-rstudio-document', echo=TRUE)
+head(players)
+p<-ggplot(players,aes(week,TP,color=players))
+p+geom_point()
+team.week[,16]
+as.numeric(team.week[,16])
+source('~/.active-rstudio-document', echo=TRUE)
+players
+library(ggplot2)
+p<-ggplot(playercount,aes(week,unique_players))
+p+geom_point()+geom_smooth()+theme_bw()
+head(players)
+players$TP
+p<-ggplot(players,aes(week,TP,color=players))
+p+geom_point()+facet_grid(.~team)
+p+geom_point()+facet_grid(team~.)
+player.week
+players.week
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+p<-ggplot(subset(players,TP>10),aes(players,team))
+p+geom_point()
+p<-ggplot(subset(players,TP>10),aes(players,color=team))
+p+geom_point()
+p+geom_histogram()
+p<-ggplot(subset(players,TP>10),aes(players,fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players,TP>5),aes(players,fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players,TP>8),aes(players,fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players,TP>9),aes(players,fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players),aes(players,week,fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players),aes(week,unique(players),fill=team))
+p+geom_histogram()
+p<-ggplot(subset(players),aes(week,players,fill=team))
+p+geom_histogram()
+p+geom_points()
+p+geom_point()
+p<-ggplot(subset(players),aes(week,players,color=team))
+p+geom_point()
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team))
+p+geom_point()
+p+geom_point()
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP))
+p+geom_point()
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()
+players$MP
+players$TP
+as.numeric(team.week[,16])
+team.week[,16]
+as.numeric(as.character(team.week[,16]))
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+p+geom_point()+scale_size(c(0,90))
+p+geom_point()+scale_alpha(c(0,90))
+p+geom_point()+scale_alpha(range=c(0,90))
+?scale_alpha
+p+geom_point()+scale_alpha(limits=c(0,90))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,20))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))
+p<-ggplot(subset(players,team=="Breast Homage Albion"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p<-ggplot(subset(players,team=="Pandamonium FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p<-ggplot(subset(players,team=="The Leopards"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+?scale_y_continuous
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_y_discrete(TP)
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_y_discrete(aes(TP)
+)
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_y_discrete(aes(TP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_y_discrete(aes(y=TP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+facet_grid(.~team)
+p<-ggplot(subset(players),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+facet_grid(.~team)
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+for(i in team.names$name)
+1
+for(i in team.names$name){
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+}
+for(i in team.names$name){
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+}
+i
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+for(i in team.names$name){
+cairo_pdf(filename=paste("~/Desktop/",i,".pdf",sep=""))
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+dev.off()
+}
+cairo_pdf(filename=paste("~/Desktop/",i,".pdf",sep=""))
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+dev.off()
+source('~/.active-rstudio-document', echo=TRUE)
+for(i in team.names$name)
+print(i)
+source('~/.active-rstudio-document', echo=TRUE)
+dev.off()
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+dev.off()
+dev.off()
+dev.off()
+source('~/.active-rstudio-document', echo=TRUE)
+dev.off()
+source('~/.active-rstudio-document', echo=TRUE)
+p
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p<-ggplot(subset(players,team==i),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p
+p
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous(limits=c(1,15))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous(limits=c(1,100))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous(limits=c(1,15))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()
+p<-ggplot(subset(players,team=="Breast Homage Albion"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()
+p<-ggplot(subset(players,team=="Breast Homage Albion" || team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()
+i
+i==1
+i==1 || i==37
+i==1 || i==36
+subset(players,team=="Breast Homage Albion" || team=="Constorm FC")
+p<-ggplot(subset(players,team=="Breast Homage Albion"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~teams)
+p<-ggplot(subset(players,aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~teams)
+p<-ggplot(subset(players,aes(week,players,color=team,size=TP,alpha=MP))
+)
+p<-ggplot(subset(players),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~teams)
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+team.week
+subset(players,team=="Constorm FC")
+players
+players$players <- factor(players$players, levels=unique(players$players), ordered=TRUE)
+p<-ggplot(subset(players),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+theurl <- paste("http://fantasy.premierleague.com/elements",sep="")
+all.players <- readHTMLTable(theurl,header=T,which=1)
+library(XML)
+theurl <- paste("http://fantasy.premierleague.com/elements",sep="")
+all.players <- readHTMLTable(theurl,header=T,which=1)
+theurl <- paste("http://fantasy.premierleague.com/stats/elements/",sep="")
+all.players <- readHTMLTable(theurl,header=T,which=1)
+all.players
+all.players$Player
+source('~/.active-rstudio-document', echo=TRUE)
+player.info("Van Persie")
+all.players
+all.players$Player
+all.players[]$team
+all.players[1]$team
+all.players[all.players$Player=="Van Persie"]$team
+[all.players$Player=="Van Persie"]
+all.players$Player=="Van Persie"
+all.players[all.players$Player=="Van Persie"]
+all.players[all.players$Player=="Van Persie"]$POS
+all.players[all.players$Player=="Van Persie"]
+[all.players$Player=="Van Persie"]
+all.players$Player=="Van Persie"
+all.players <- readHTMLTable(theurl,header=T,which=1,colClasses=c('character'))
+all.players
+all.players <- readHTMLTable(theurl,header=T,which=1,colClasses=rep('character',8))
+all.players$Player
+as.character(all.players$Player)
+all.players<-as.character(all.players)
+all.players
+?readHTMLTable
+all.players <- readHTMLTable(theurl,header=T,which=1,stringsAsFactors=F)
+all.players
+all.players$Player
+return(all.players[all.players$Player==x])
+source('~/.active-rstudio-document', echo=TRUE)
+all.players$Player=="Van Persie"
+all.players[all.players$Player=="Van Persie"]
+all.players[all.players$Player=="Van Persie"]$POS
+all.players$POS[all.players$Player=="Van Persie"]
+all.players$POS
+all.players$Pos
+all.players$Pos[all.players$Player=="Van Persie"]
+all.players$Team[all.players$Player=="Van Persie"]
+r<-data.frame(name=x,position=all.players$Pos[all.players$Player==x],team=all.players$Team[all.players$Player==x])
+source('~/.active-rstudio-document', echo=TRUE)
+return(r)
+source('~/.active-rstudio-document', echo=TRUE)
+player.info("Mata")
+player.info(c("Van Persie","Mata"))
+player.info(as.character(team.week[,1]))
+team.week[,1]
+as.character(team.week[,1])
+player.info(as.character(team.week[,1]))
+player.info(as.character(team.week[1,1]))
+player.info(as.character(team.week[2,1]))
+player.info(as.character(team.week[1,1]))
+theurl <- paste("http://fantasy.premierleague.com/stats/elements/?page2.php",sep="")
+all.players <- rbind(all.players,readHTMLTable(theurl,header=T,which=1,stringsAsFactors=F))
+all.players
+source('~/.active-rstudio-document', echo=TRUE)
+all.players
+source('~/.active-rstudio-document', echo=TRUE)
+theurl <- paste("http://fantasy.premierleague.com/stats/elements/?page=",i,".php",sep="")
+theurl
+readHTMLTable(theurl,header=T,which=1,stringsAsFactors=F)
+theurl <- paste("http://fantasy.premierleague.com/stats/elements/?page=13",sep="")
+all.players <- rbind(all.players,readHTMLTable(theurl,header=T,which=1,stringsAsFactors=F))
+all.players
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+players
+team.week[,1]
+player.info(as.character(team.week[,1]))
+player.info(as.character(team.week[1,1]))
+player.info(as.character(team.week[1:2,1]))
+player.info(as.character(team.week[2,1]))
+player.info(as.character(team.week[3,1]))
+player.info(as.character(team.week[4,1]))
+player.info(as.character(team.week[5,1]))
+team.week[5,1]
+player.info("Noble")
+player.info("Lampard")
+player.info("Noble")
+player.info(c("Van Persie","Mata","Nobel"))
+source('~/.active-rstudio-document', echo=TRUE)
+all.players$Player
+length(all.players$Player)
+length(all.players$Player)-length(unique(all.players$Player))
+length(unique(all.players$Player))
+length(all.players$Player)-length(unique(all.players$Player))
+all.players[1]
+all.players[2]
+all.players$Player[!unqiue(all.players$Player)]
+all.players$Player[!unique(all.players$Player)]
+all.players$Player
+unique(all.players$Player)
+?uniue
+?unique
+duplicated(all.players$Players)
+all.players$Players
+all.players$Player
+duplicated(all.players$Player)
+all.players$Player[duplicated(all.players$Player)]
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+player.info(c("Van Persie","Mata"))
+player.info(c("Van Persie"))
+player.info(c("Mata"))
+player.info(c("Lampard"))
+????test
+p<-ggplot(subset(players),aes(week,players,color=team,size=GS,alpha=MP))
+library(ggplot2)
+p<-ggplot(subset(players),aes(week,players,color=team,size=GS,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+p<-ggplot(subset(players),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+p<-ggplot(subset(players,team="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+p<-ggplot(subset(players,team=="Constorm FC"),aes(week,players,color=team,size=TP,alpha=MP))
+p+geom_point()+scale_alpha(limits=c(0,90),breaks=seq(0,90,30))+theme_bw()+scale_size_continuous()+facet_grid(.~team)
+players.week
+team.week
+?grid.arrange
+install.paclages('gridExtra')
+install.packages('gridExtra')
+library(gridExtra)
+qplot(subset(players,team=='Constorm FC')$week,subset(players,team=='Constorm FC')$TP)
+library(ggplot2)
+qplot(subset(players,team=='Constorm FC')$week,subset(players,team=='Constorm FC')$TP)
+a<-qplot(subset(players,team=='Constorm FC')$week,subset(players,team=='Constorm FC')$TP)
+a
+b<-qplot(subset(players,team=='Breast Homage Albion')$week,subset(players,team=='Constorm FC')$TP)
+b
+b<-qplot(subset(players,team=='Breast Homage Albion')$week,subset(players,team=='Breast Homage Albion')$TP)
+b
+grid.arrange(a,b)
+grid.arrange(a,b)
+source('~/Dropbox/Fantasy Football/main.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/withHooper/ggplots.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/ggplots.R', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/Dropbox/Fantasy Football/currentform.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/extrapolate.R', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+head(ggmain)
+head(subset(ggmain,week==37))
+source('~/Dropbox/Fantasy Football/probabilitydensities.R', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/Dropbox/Fantasy Football/funggplots.R', echo=TRUE)
+head(ggmain)
+mean(subset(ggmain),names=="constorm fc")
+mean(subset(ggmain,names=="constorm fc")
+)
+mean(subset(ggmain,names=="constorm fc")$gwpoints)
+47.11*2
+subset(ggmain,neams=="constorm fc")
+subset(ggmain,names=="constorm fc")
+mean(subset(ggmain,names=="constorm fc")$gwpoints)
+1625+47*2
+subset(ggmain,week==37)
+source('~/Dropbox/Fantasy Football/main.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/withHooper/ggplots.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/ggplots.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/currentform.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/extrapolate.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/probabilitydensities.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/funggplots.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/players.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football/funggplots.R', echo=TRUE)

@@ -1,0 +1,512 @@
+?diffraction.line
+diffraction.line
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+library(RCurl)
+ftpUpload("index.html",to="ftp://people.ex.ac.uk/FF/index.html", userpwd="tjc202:maXwell1864")
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team))
+cum_points+geom_point()+geom_line()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team))
+cum_points+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,colour=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+library(ggplot2)
+cum_points<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points")
+total_value_cl<-ggplot(master_sgc,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_cl<-ggplot(master_sgc,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+ttotal_value_sg<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_sg+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+ttotal_value_sg<-ggplot(master_sgc,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_sg+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_sg<-ggplot(master_sgc,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_sg+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+master_sgc
+total_value_sg<-ggplot(master_sgc,aes(x=GW,y=TV,colour=Team,fill=Team))
+total_value_sg+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_sg+geom_point(mapping=aes(size=TM))+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+library(plyr)
+dream_team<-data.frame()
+for(j in 1:current_gameweek){
+for(i in name_table[,1]){
+expt<-player_history[player_history$Team == i & player_history$GW==j,]
+dt<-arrange(expt,-TP)
+dt[1,19]<-dt[1,19]*2 #Extra Points for Captain
+tempdf<-data.frame(Team=i,GW=j,TP=sum(dt$TP[1:11]))
+dream_team<-rbind(dream_team,tempdf)
+}
+}
+final_dream_team<-data.frame()
+for(i in 1:length(name_table[,1])){
+temp<-data.frame(Team=rep(name_table[i,1]),GW=1:current_gameweek,TP=cumsum(dream_team$TP[dream_team$Team==name_table[i,1]]))
+final_dream_team<-rbind(final_dream_team,temp)
+}
+q<-ggplot(final_dream_team,aes(GW,TP,color=Team))
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumalative Score")
+current_gameweek
+library(plyr)
+dream_team<-data.frame()
+for(j in 1:current_gameweek){
+for(i in name_table[,1]){
+expt<-player_history[player_history$Team == i & player_history$GW==j,]
+dt<-arrange(expt,-TP)
+dt[1,19]<-dt[1,19]*2 #Extra Points for Captain
+tempdf<-data.frame(Team=i,GW=j,TP=sum(dt$TP[1:11]))
+dream_team<-rbind(dream_team,tempdf)
+}
+}
+final_dream_team<-data.frame()
+for(i in 1:length(name_table[,1])){
+temp<-data.frame(Team=rep(name_table[i,1]),GW=1:current_gameweek,TP=cumsum(dream_team$TP[dream_team$Team==name_table[i,1]]))
+final_dream_team<-rbind(final_dream_team,temp)
+}
+q<-ggplot(final_dream_team,aes(GW,TP,color=Team))
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+temp
+tempdf
+player_history
+options(xtable.type = 'html')
+source("scrape_gameweekhistory.R")
+source("team_name.R")
+#source("scrape_playershistory.R")
+source("master_championsleague.R")
+source("master_stormguardsclassic.R")
+current_gameweek<-max(master_cl$GW)
+#player_history<-scrape_playerhistory(1:current_gameweek)
+#player_gameweek<-scrape_playerhistory(current_gameweek)
+library(plyr)
+dream_team<-data.frame()
+for(j in 1:current_gameweek){
+for(i in name_table[,1]){
+expt<-player_history[player_history$Team == i & player_history$GW==j,]
+dt<-arrange(expt,-TP)
+dt[1,19]<-dt[1,19]*2 #Extra Points for Captain
+tempdf<-data.frame(Team=i,GW=j,TP=sum(dt$TP[1:11]))
+dream_team<-rbind(dream_team,tempdf)
+}
+}
+final_dream_team<-data.frame()
+for(i in 1:length(name_table[,1])){
+temp<-data.frame(Team=rep(name_table[i,1]),GW=1:current_gameweek,TP=cumsum(dream_team$TP[dream_team$Team==name_table[i,1]]))
+final_dream_team<-rbind(final_dream_team,temp)
+}
+q<-ggplot(final_dream_team,aes(GW,TP,color=Team))
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+options(xtable.type = 'html')
+top_5<-sort(table(player_gameweek$Player))[sort(table(player_history$Player))>=sort(table(player_gameweek$Player))[length(sort(table(player_gameweek$Player)))-4]]
+round(100*data.frame(Percentage=sort(top_5,decreasing=T))/14,digits=1)
+player_gameweek
+names(temp)<-c("Team","GW","Player","Icon","MP","GS","A","CS","GC","OG","PS","PM","YC","RC","S","B","ESP","BPS","TP")
+temp
+source('~/Dropbox/Fantasy Football 13-14/scrape_playershistory.R')
+names(temp)
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+source('~/.active-rstudio-document')
+scrape_playerhistory(1)
+name_table[,2]
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+?geom_smooth
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team,alpha=0.5))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T)
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team,alpha=0.05))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T)
+?geom_smooth
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team,alpha=1))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.5)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.01)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.5)
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.5)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.2)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.2)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/38)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*378))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))+ expand_limits(y=0)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))+expand_limits(y=0)
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team,ymin=0))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team,ymin=0))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))+ expand_limits(y=0)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))+expand_limits(y=0)
+?expand_limits
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))+expand_limits(y=0)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))+scale_y_continuous(limits=c(0, max(master_cl$OP) * 1.1))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R')
+source('~/.active-rstudio-document', echo=TRUE)
+master_cl
+head(master_cl)
+p<-ggplot(master_cl,aes(x=GP,group=Team))
+p+geom_density()
+library(ggplot2)
+p<-ggplot(master_cl,aes(x=GP,group=Team))
+p+geom_density()
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team))
+p+geom_density()
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team,alpha=0.5))
+p+geom_density()
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team,alpha=0.5,colour=Team))
+p+geom_density()
+p+geom_density()+theme_bw()
+p+geom_density()+theme_bw()+facet(.~Team)
+p+geom_density()+theme_bw()+facet+grid(.~Team)
+p+geom_density()+theme_bw()+facet_grid(.~Team)
+p+geom_density()+theme_bw()+facet_grid(Team~.)
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team,colour=Team))
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.)
+?scale_y_continuous
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.)+scale_y_continuous(scales="free")
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))
+library(ggplot2)
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team,colour=Team))
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))
+p<-ggplot(master_sgc,aes(x=GP,group=Team,fill=Team,colour=Team))
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))
+install.packages("Cairo")
+15/9
+6*15/9
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))+ylab("Point Distribution")
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))+ylab("Point Distribution")+xlab("Points")
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))+ylab("Point Distribution")+xlab("Points Per GW")
+source('~/Dropbox/Fantasy Football 13-14/compile_and_upload.R', echo=TRUE)
+?googleVis
+library(googleVis)
+?googleVis
+gvisTable(master_cl)
+source('~/Dropbox/Fantasy Football 13-14/scrape_gameweekhistory.R', echo=TRUE)
+library(googleVis)
+vignette(googleVis)
+?googleVis
+vignette("googleVis")
+plot(gvisTable(master_cl))
+master_cl$GW
+print(gvisTable(subset(master_cl,GW==current_gameweek)))
+print(gvisTable(subset(master_cl,GW==current_gameweek),options=list(sortColumn=4)))
+print(gvisTable(subset(master_cl,GW==current_gameweek),options=list(sortColumn=8)),'chart')
+?gvisTable
+master_cl[1,]
+master_cl[,1:3]
+head(master_cl)
+head(master_cl[,c(1,2,3,5,6,7)])
+head(master_cl[,c(1,2,3,5,6,7,8)])
+h<-(master_cl[,c(1,2,3,5,6,7,8)])
+is.data.frame(h)
+subset(h,GW==3)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/Dropbox/Fantasy Football 13-14/scrape_gameweekhistory.R', echo=TRUE)
+source("master_championsleague.R")
+master_cl
+id<-371350
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"numeric",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
+temp$TV<-as.numeric(temp$TV)
+temp
+temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"numeric",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
+temp
+temp$TV<-(substr(temp$TV,3,nchar(temp$TV)-1))
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"numeric",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp$TV<-(substr(temp$TV,3,nchar(temp$TV)-1))
+temp$TV<-as.numeric(temp$TV)
+temp
+source('~/Dropbox/Fantasy Football 13-14/scrape_gameweekhistory.R', echo=TRUE)
+source('~/Dropbox/Fantasy Football 13-14/scrape_playershistory.R', echo=TRUE)
+scrape_playerhistory(1)
+temp<-data.frame(Team=team_name(i), GW=j,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+j
+i
+name_table
+for(i in as.numeric(name_table[,2])){
+for(j in GW){
+temp<-data.frame(Team=team_name(i), GW=j,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+names(temp)<-c("Team","GW","Player","Icon","MP","GS","A","CS","GC","OG","PS","PM","YC","RC","S","B","ESP","BPS","TP")
+player_history<-rbind(player_history,temp)
+}
+return(player_history)
+}
+i
+temp<-data.frame(Team=team_name(i), GW=j,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+team_name(i)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric"))
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),
+which=1,stringsAsFactors = FALSE, colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric)
+source('~/Dropbox/Fantasy Football 13-14/scrape_playershistory.R', echo=TRUE)
+c
+q
+`)
+)
+}
+source('~/.active-rstudio-document', echo=TRUE)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+i
+j
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""))
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=0)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=1)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=2)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=3)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=4)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=5)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=-1)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=c(1:3))
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=1:4)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=1:3)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=1:2)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=1:1)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=2)
+a<-readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),which=2)
+a
+head(a)
+library(RCurl)
+?RCurl
+install.packages("scrapeR")
+library(scrapeR)
+scrape(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""))
+paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")
+a<-paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep="")
+scrape(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""))
+scrape(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,"index.html",sep=""))
+a<-scrape(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,"index.html",sep=""))
+a$http://fantasy.premierleague.com/entry/371350/event-history/3index.html
+xpathSApply(a,"//table//td/a",xmlValue)
+a<-scrape(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,"index.html",sep=""),object="pageSource")
+b<-scrape(a,object="pageSource")
+b<-scrape(object="pageSource")
+b<-scrape(object="b")
+b<-scrape(object=b)
+b<-scrape(object=a)
+b<-scrape(object="a")
+b
+xpathSApply(b,"//table//td/a",xmlValue)
+?xpathApply
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.2)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.1)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.01)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.05)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation based on Current Form")+xlim(current_gameweek-5,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1))
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation based on Current Form")+xlim(current_gameweek-5,38)+stat_smooth(method="lm",fullrange=T,alpha=0.1)
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation based on Current Form")+xlim(current_gameweek-5,38)+stat_smooth(method="lm",fullrange=T,alpha=0.01)
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation based on Current Form")+xlim(current_gameweek-5,38)+stat_smooth(method="lm",fullrange=T,alpha=0.05)
+total_cards<-data.frame()
+for(n in name_table[c(5,10:14),1]){
+temp.df<-data.frame(Team=n,cards=sum(subset(player_history,Team==n)$YC)+3*sum(subset(player_history,Team==n)$RC))
+if(temp.df$cards!=0) total_cards<-rbind(total_cards,temp.df)
+}
+p<-ggplot(total_cards,aes(Team,cards,fill=Team))
+p+geom_bar()+
+theme_minimal()+
+xlab('')+
+ylab('')+
+labs(fill='Team')+ theme(axis.ticks = element_blank(),
+axis.text.x = element_blank()) +ggtitle("Dirty Bastard Chart (Card Deductions from all GWs)")
+library(ggplot2)
+total_cards<-data.frame()
+for(n in name_table[c(5,10:14),1]){
+temp.df<-data.frame(Team=n,cards=sum(subset(player_history,Team==n)$YC)+3*sum(subset(player_history,Team==n)$RC))
+if(temp.df$cards!=0) total_cards<-rbind(total_cards,temp.df)
+}
+p<-ggplot(total_cards,aes(Team,cards,fill=Team))
+p+geom_bar()+
+theme_minimal()+
+xlab('')+
+ylab('')+
+labs(fill='Team')+ theme(axis.ticks = element_blank(),
+axis.text.x = element_blank()) +ggtitle("Dirty Bastard Chart (Card Deductions from all GWs)")
+library(plyr)
+dream_team<-data.frame()
+for(j in 1:current_gameweek){
+for(i in name_table[,1]){
+expt<-player_history[player_history$Team == i & player_history$GW==j,]
+dt<-arrange(expt,-TP)
+dt[1,19]<-dt[1,19]*2 #Extra Points for Captain
+tempdf<-data.frame(Team=i,GW=j,TP=sum(dt$TP[1:11]))
+dream_team<-rbind(dream_team,tempdf)
+}
+final_dream_team<-data.frame()
+for(i in 1:length(name_table[,1])){
+temp<-data.frame(Team=rep(name_table[i,1]),GW=1:current_gameweek,TP=cumsum(dream_team$TP[dream_team$Team==name_table[i,1]]))
+final_dream_team<-rbind(final_dream_team,temp)
+}
+q<-ggplot(final_dream_team,aes(GW,TP,color=Team))
+q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+source('~/.active-rstudio-document', echo=TRUE)
+final_dream_team
+total_cards<-data.frame()
+for(n in name_table[1:9,1]){
+temp.df<-data.frame(Team=n,cards=sum(subset(player_history,Team==n)$YC)+3*sum(subset(player_history,Team==n)$RC))
+if(temp.df$cards!=0) total_cards<-rbind(total_cards,temp.df)
+}
+p<-ggplot(total_cards,aes(Team,cards,fill=Team))
+p+geom_bar()+
+theme_minimal()+
+xlab('')+
+ylab('')+
+labs(fill='Team')+ theme(axis.ticks = element_blank(),
+axis.text.x = element_blank()) +ggtitle("Dirty Bastard Chart (Card Deductions from all GWs)")
+total_cards
+temp.df
+source("scrape_playershistory.R")
+source('~/Dropbox/Fantasy Football 13-14/scrape_playershistory.R', echo=TRUE)
+options(xtable.type = 'html')
+source("scrape_gameweekhistory.R")
+source("team_name.R")
+source("scrape_playershistory.R")
+source("master_championsleague.R")
+source("master_stormguardsclassic.R")
+current_gameweek<-max(master_cl$GW)
+player_history<-scrape_playerhistory(1:current_gameweek)
+player_gameweek<-scrape_playerhistory(current_gameweek)
+source('~/.active-rstudio-document', echo=TRUE)
+library(XML)
+id
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"numeric",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"FormattedNumber",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp
+library(ggplot2)
+?stat_smooth
+source('~/.active-rstudio-document', echo=TRUE)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+end.rcode-->
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smoothfullrange=T,alpha=current_gameweek/(2*38))
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38))
+?lm
+?loess
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=5,degree=1)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=5,degree=2)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=5,degree=1)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=0.5,degree=1)
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=1,degree=1)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=2,degree=1)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(fullrange=T,alpha=current_gameweek/(2*38),span=0.75,degree=1)
+source('~/Dropbox/Fantasy Football 13-14/scrape_gameweekhistory.R', echo=TRUE)
+scrape_gameweekhistory(1374728)
+source('~/Dropbox/Fantasy Football 13-14/team_name.R', echo=TRUE)
+scrape_gameweekhistory(1374728)

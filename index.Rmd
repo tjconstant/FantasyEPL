@@ -19,9 +19,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The Fantasy Football season has now ended, and the stats and simulation pages have been archived.
 
-* For the final gameweek (38) stats pages you can **[<i class ="fas fa-futbol"></i> click here](site_archive/index.html).**
+* For the final gameweek (38) stats pages you can **[<i class ="fas fa-futbol"></i> click here](archive/2017-18/index.html).**
 
-* For the last Monte Carlo simulation (GW37) you can **[<i class ="fas fa-chart-line"></i> click here](site_archive/monte_carlo.html).**
+* For the last Monte Carlo simulation (GW37) you can **[<i class ="fas fa-chart-line"></i> click here](archive/2017-18/monte_carlo.html).**
 
 * To download the final datasets scraped from the fantasy football site in CSV format, **[<i class ="fas fa-download"></i> click here](data/data.zip).**
 

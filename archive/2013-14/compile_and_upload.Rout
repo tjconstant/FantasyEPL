@@ -1,0 +1,290 @@
+
+R version 3.0.1 (2013-05-16) -- "Good Sport"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(knitr)
+> 
+> knit('index.Rhtml', encoding='UTF-8')
+
+
+processing file: index.Rhtml
+  |                                                                         |                                                                 |   0%  |                                                                         |..                                                               |   3%
+   inline R code fragments
+
+  |                                                                         |....                                                             |   6%
+label: unnamed-chunk-1 (with options) 
+List of 4
+ $ echo   : logi FALSE
+ $ error  : logi FALSE
+ $ warning: logi FALSE
+ $ message: symbol F
+
+  |                                                                         |......                                                           |   9%
+  ordinary text without R code
+
+  |                                                                         |........                                                         |  12%
+label: unnamed-chunk-2 (with options) 
+List of 3
+ $ echo   : symbol F
+ $ tidy   : logi TRUE
+ $ comment: logi NA
+
+  |                                                                         |..........                                                       |  15%
+  ordinary text without R code
+
+  |                                                                         |............                                                     |  18%
+label: unnamed-chunk-3 (with options) 
+List of 6
+ $ echo   : logi FALSE
+ $ error  : logi FALSE
+ $ warning: logi FALSE
+ $ message: symbol F
+ $ comment: logi NA
+ $ results: chr "asis"
+
+
+Welcome to googleVis version 0.4.5
+
+Please read the Google API Terms of Use
+before you use the package:
+https://developers.google.com/terms/
+
+Type ?googleVis to access the overall documentation and
+vignette('googleVis') for the package vignette.
+You can execute a demo of the package via: demo(googleVis)
+
+More information is available on the googleVis project web-site:
+http://code.google.com/p/google-motion-charts-with-r/
+
+Contact: <rvisualisation@gmail.com>
+
+To suppress the this message use:
+suppressPackageStartupMessages(library(googleVis))
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |................                                                 |  24%
+label: CumGraph-CL (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+  |                                                                         |..................                                               |  27%
+  ordinary text without R code
+
+  |                                                                         |....................                                             |  30%
+label: CumGraph-CL-Extrap (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |......................                                           |  33%
+  ordinary text without R code
+
+  |                                                                         |........................                                         |  36%
+label: CumGraph-CL-Extrap-RF (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 32 rows containing missing values (stat_smooth).
+Warning: Removed 288 rows containing missing values (geom_point).
+  |                                                                         |..........................                                       |  39%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  42%
+label: TVGraph-CL (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+  |                                                                         |..............................                                   |  45%
+  ordinary text without R code
+
+  |                                                                         |................................                                 |  48%
+label: Density-CL (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 15
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.................................                                |  52%
+  ordinary text without R code
+
+  |                                                                         |...................................                              |  55%
+label: DirtyBastard-CL (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.....................................                            |  58%
+  ordinary text without R code
+
+  |                                                                         |.......................................                          |  61%
+label: unnamed-chunk-4 (with options) 
+List of 6
+ $ echo   : logi FALSE
+ $ error  : logi FALSE
+ $ warning: logi FALSE
+ $ message: symbol F
+ $ comment: logi NA
+ $ results: chr "asis"
+
+  |                                                                         |.........................................                        |  64%
+  ordinary text without R code
+
+  |                                                                         |...........................................                      |  67%
+label: CumGraph-SC (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+  |                                                                         |.............................................                    |  70%
+  ordinary text without R code
+
+  |                                                                         |...............................................                  |  73%
+label: CumGraph-SGC-Extrap (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.................................................                |  76%
+  ordinary text without R code
+
+  |                                                                         |...................................................              |  79%
+label: TVGraph-SC (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
+  |                                                                         |.....................................................            |  82%
+  ordinary text without R code
+
+  |                                                                         |.......................................................          |  85%
+label: Density-SC (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 10
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.........................................................        |  88%
+  ordinary text without R code
+
+  |                                                                         |...........................................................      |  91%
+label: DirtyBastard-SC (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.............................................................    |  94%
+  ordinary text without R code
+
+  |                                                                         |...............................................................  |  97%
+label: DreamTeam (with options) 
+List of 7
+ $ fig.width : num 10
+ $ fig.height: num 6
+ $ echo      : symbol F
+ $ error     : logi FALSE
+ $ warning   : logi FALSE
+ $ message   : symbol F
+ $ dev       : chr "CairoPNG"
+
+  |                                                                         |.................................................................| 100%
+  ordinary text without R code
+
+
+output file: index.html
+
+[1] "index.html"
+> 
+> library(RCurl)
+Loading required package: bitops
+> 
+> ftpUpload("index.html",to="ftp://people.ex.ac.uk/FF/index.html", userpwd="tjc202:maXwell1864")
+Error in function (type, msg, asError = TRUE)  : Access denied: 530
+Calls: ftpUpload -> curlPerform -> .Call -> <Anonymous> -> fun
+Execution halted

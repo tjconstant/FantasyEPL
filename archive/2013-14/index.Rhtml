@@ -1,0 +1,243 @@
+<html>
+
+<head>
+<title>Fantasy Football 2013/14 Stats</title>
+
+<style type="text/css">
+
+body
+{
+font-family:'HelveticaNeue-Light','Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#5A5A5A;
+letter-spacing:1px;
+text-align:center;
+}
+a{
+color:#5A5A5A;
+}
+
+h1 
+{
+font-family:'HelveticaNeue-Light','Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:51px;
+font-weight:normal;
+font-style:normal;
+text-align:center;
+}
+
+h2
+{
+font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;
+font-size:18px;
+font-weight:normal;
+font-style:normal;
+text-align:center;
+}
+
+div {
+}
+
+#graph
+{
+position:relative;
+left:50px;
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Fantasy Football 2013/14 Stats Page</h1>
+<h2>Last updated: <!--rinline date() --></h2>
+
+
+<!--begin.rcode echo=FALSE, error=FALSE, warning=FALSE, message=F
+options(xtable.type = 'html')
+
+source("scrape_gameweekhistory.R")
+source("team_name.R")
+#source("scrape_playershistory.R")
+
+
+source("master_championsleague.R")
+source("master_stormguardsclassic.R")
+
+current_gameweek<-max(master_cl$GW)
+#player_history<-scrape_playerhistory(1:current_gameweek)
+#player_gameweek<-scrape_playerhistory(current_gameweek)
+
+end.rcode-->
+
+<!---<p>The most popular players in the Champions League & Stormgurads Classic this gameweek:</p>---!>
+<!--begin.rcode echo=F,tidy=TRUE, comment=NA
+ options(xtable.type = 'html')
+# 
+# top_5<-sort(table(player_gameweek$Player))[sort(table(player_history$Player))>=sort(table(player_gameweek$Player))[length(sort(table(player_gameweek$Player)))-4]]
+# 
+# round(100*data.frame(Percentage=sort(top_5,decreasing=T))/14,digits=1)
+end.rcode-->
+ 
+<p>Sadly, the premier league website is currently having difficulties. Only a reduced-service for statistics is avalible today</p>
+
+<h1>The Champions League</h1>
+<center>
+<!--begin.rcode echo=FALSE, error=FALSE, warning=FALSE, message=F, comment=NA, results='asis'
+library(googleVis)
+print(gvisTable(subset(master_cl,GW==current_gameweek),options=list(width=540,height=250,sortColumn=7,sortAscending=F)),'chart')
+end.rcode-->
+</center>
+
+<a href="presentation.html">Click Here for Presentation Version</a>
+<div id="graph">
+<!--begin.rcode CumGraph-CL, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.05)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+
+end.rcode-->
+
+<!--begin.rcode CumGraph-CL-Extrap, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+end.rcode-->
+
+<!--begin.rcode CumGraph-CL-Extrap-RF, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation based on Current Form")+xlim(current_gameweek-5,38)+stat_smooth(method="lm",fullrange=T,alpha=0.05)
+end.rcode-->
+
+<!--begin.rcode TVGraph-CL, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth(alpha=0.05)+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+end.rcode-->
+
+<!--begin.rcode Density-CL, fig.width=10, fig.height=15, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+p<-ggplot(master_cl,aes(x=GP,group=Team,fill=Team,colour=Team))
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))+ylab("Point Distribution")+xlab("Points Per GW")
+
+end.rcode-->
+
+
+<!--begin.rcode DirtyBastard-CL, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+# total_cards<-data.frame()
+# 
+# for(n in name_table[1:9,1]){
+#  temp.df<-data.frame(Team=n,cards=sum(subset(player_history,Team==n)$YC)+3*sum(subset(player_history,Team==n)$RC))
+#  if(temp.df$cards!=0) total_cards<-rbind(total_cards,temp.df)
+# }
+# 
+# p<-ggplot(total_cards,aes(Team,cards,fill=Team))
+# p+geom_bar()+
+#  theme_minimal()+
+#  xlab('')+
+#  ylab('')+
+#  labs(fill='Team')+ theme(axis.ticks = element_blank(), 
+#                           axis.text.x = element_blank()) +ggtitle("Dirty Bastard Chart (Card Deductions from all GWs)")
+
+end.rcode-->
+</div>
+
+<h1>The Stormguards Classic</h1>
+
+<center>
+<!--begin.rcode echo=FALSE, error=FALSE, warning=FALSE, message=F, comment=NA, results='asis'
+library(googleVis)
+print(gvisTable(subset(master_sgc,GW==current_gameweek),options=list(width=540,height=250,sortColumn=7,sortAscending=F)),'chart')
+end.rcode-->
+</center>
+
+<div id="graph">
+<!--begin.rcode CumGraph-SC, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+cum_points<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth(alpha=0.05)+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points")
+
+end.rcode-->
+
+<!--begin.rcode CumGraph-SGC-Extrap, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+cum_points_extrap<-ggplot(master_sgc,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumulative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+
+end.rcode-->
+
+<!--begin.rcode TVGraph-SC, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+total_value_sg<-ggplot(master_sgc,aes(x=GW,y=TV,colour=Team,fill=Team))
+total_value_sg+geom_point(mapping=aes(size=TM))+geom_smooth(alpha=0.05)+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+end.rcode-->
+
+<!--begin.rcode Density-SC, fig.width=10, fig.height=10, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+
+library(ggplot2)
+p<-ggplot(master_sgc,aes(x=GP,group=Team,fill=Team,colour=Team))
+p+geom_density(alpha=0.5)+theme_bw()+facet_grid(Team~.,scales="free")+scale_x_continuous(expand=c(0,0))+ylab("Point Distribution")+xlab("Points Per GW")
+
+end.rcode-->
+
+<!--begin.rcode DirtyBastard-SC, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+# 
+# total_cards<-data.frame()
+# 
+# for(n in name_table[c(5,10:14),1]){
+#  temp.df<-data.frame(Team=n,cards=sum(subset(player_history,Team==n)$YC)+3*sum(subset(player_history,Team==n)$RC))
+#  if(temp.df$cards!=0) total_cards<-rbind(total_cards,temp.df)
+# }
+# 
+# p<-ggplot(total_cards,aes(Team,cards,fill=Team))
+# p+geom_bar()+
+#  theme_minimal()+
+#  xlab('')+
+#  ylab('')+
+#  labs(fill='Team')+ theme(axis.ticks = element_blank(),
+#                           axis.text.x = element_blank()) +ggtitle("Dirty Bastard Chart (Card Deductions from all GWs)")
+
+end.rcode-->
+</div>
+<!--begin.rcode DreamTeam, fig.width=10, fig.height=6, echo=F,error=FALSE, warning=FALSE, message=F, dev='CairoPNG'
+# 
+# library(plyr)
+# 
+# dream_team<-data.frame()
+# for(j in 1:current_gameweek){
+#  for(i in name_table[,1]){
+#    
+#    expt<-player_history[player_history$Team == i & player_history$GW==j,]
+#    dt<-arrange(expt,-TP)
+#     
+#    dt[1,19]<-dt[1,19]*2 #Extra Points for Captain
+#     
+#    tempdf<-data.frame(Team=i,GW=j,TP=sum(dt$TP[1:11]))
+#    dream_team<-rbind(dream_team,tempdf)
+#    }
+#  }
+# 
+# final_dream_team<-data.frame()
+# 
+# for(i in 1:length(name_table[,1])){
+#  temp<-data.frame(Team=rep(name_table[i,1]),GW=1:current_gameweek,TP=cumsum(dream_team$TP[dream_team$Team==name_table[i,1]]))
+#  final_dream_team<-rbind(final_dream_team,temp)
+# }
+# 
+# q<-ggplot(final_dream_team,aes(GW,TP,color=Team))
+# q+geom_point()+geom_line()+theme_bw()+ggtitle("Dream Team Results: Cumulative Score")
+
+end.rcode-->
+
+Note: This does not include formation limitations.
+
+
+</body>
+</html>

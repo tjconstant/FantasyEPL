@@ -1,0 +1,138 @@
+%% ****** Start of file template.aps ****** %
+%%
+%%
+%%   This file is part of the APS files in the REVTeX 4 distribution.
+%%   Version 4.0 of REVTeX, August 2001
+%%
+%%
+%%   Copyright (c) 2001 The American Physical Society.
+%%
+%%   See the REVTeX 4 README file for restrictions and more information.
+%%
+%
+% This is a template for producing manuscripts for use with REVTEX 4.0
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+%
+% Group addresses by affiliation; use superscriptaddress for long
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+\documentclass[aps,prl,twocolumn,showpacs,superscriptaddress,groupedaddress]{revtex4}  % for review and submission
+%\documentclass[aps,preprint,showpacs,superscriptaddress,groupedaddress]{revtex4}  % for double-spaced preprint
+\usepackage{graphicx}  % needed for figures
+\usepackage{dcolumn}   % needed for some tables
+\usepackage{bm}        % for math
+\usepackage{amssymb}   % for math
+
+% avoids incorrect hyphenation, added Nov/08 by SSR
+\hyphenation{ALPGEN}
+\hyphenation{EVTGEN}
+\hyphenation{PYTHIA}
+
+
+\begin{document}
+
+% The following information is for internal review, please remove them for submission
+\widetext
+
+
+% the following line is for submission, including submission to the arXiv!!
+%\hspace{5.2in} \mbox{Fermilab-Pub-04/xxx-E}
+
+\title{Analysis of Exeter Electromagnetic and Acoustic Materials Fantasy Football League as of Gameweek 21}
+
+\author{Thomas J. Constant}
+\affiliation{Electromagnetic Materials Group, University of Exeter, Stocker Road, Exeter, EX4 4QL.}
+
+\date{\today}
+
+
+\begin{abstract}
+A brief and simple statistical analysis is presented on the current state of Exeter Electromagnetic and Acoustic Materials Fantasy Football League (EEAMFFL) as of Gameweek 21. It is found that the trend in cumulative score follows a linear trend to a good approximation ($\bar{R^2}\approx 0.99$), and that the individual standard deviations and predicted final scores show that while ``The St Hubbins XI" are currently in the lead, ``The Leopards" have a $\approx4$\% greater chance of winning the league outright. Our results show that first place in the league is a somewhat two-horse race, while  $3^{rd}$ position for the contest is extremely competitive.
+\end{abstract}
+
+\pacs{}
+\maketitle
+
+\section{Introduction}
+
+To date, Fantasy Football analysis on the EEAMFFL has consisted of an Excel spreadsheet stuck on the wall of G31. We employ here instead a simple statistical analysis of the current Gameweek statistics, using the free statistical software package R.
+
+Figure 1 shows the current cumulative score for players in the EEAMFFL.
+\begin{figure}
+\includegraphics[width=\linewidth]{cumgraph2.pdf}
+\caption{The cumulative score of players as of gameweek 22. The black line with the higher score is the data for Breast Homage Albion FC, the lower is Thales FC. Constorm FC (green) started in GW 3.}
+\end{figure}
+The most recent results in Figure 1 show that the current leaders are The St Hubbins XI, closely followed by The Leopards. There is then a grouping of teams competing for 3rd place, and two teams competing for last.
+
+\section{Extrapolation of Results}
+
+The cumulative scores shown in figure 1 are approximately linear and may be fitted with a simple formula of
+\begin{equation}
+y=mx+0
+\end{equation}
+in the special case of Constorm FC, which started GW 3, an intercept is required and so this team is fitted using the following equation,
+\begin{equation}
+y=mx+c
+\end{equation}
+The $R^2$ and standard deviations ($\sigma$) for each team is presented in Fig 2.
+\begin{figure}
+\begin{tabular}{l c c }
+
+Team (abbreviated) & $R^2$ & $\sigma$ \\ 
+\hline \hline 
+Breast FC & 0.9993 & 10.91 \\ 
+\hline 
+Chirs FC & 0.9991 & 9.86 \\ 
+\hline 
+Constorm FC & 0.9958 & 13.96 \\ 
+\hline 
+Hubbins & 0.9995 & 10.00 \\ 
+\hline 
+Hungover & 0.9984 & 10.89 \\ 
+\hline 
+Leopards & 0.9991 & 11.40 \\ 
+\hline 
+Panda & 0.9982 & 16.71 \\ 
+\hline 
+Pub & 0.9997 & 10.63 \\ 
+\hline 
+Thales & 0.9989 & 8.73 \\ 
+\hline 
+\end{tabular} 
+\caption{Table showing the quality of fit ($R^2$) and standard deviation($\sigma$) for the EEAMFFL teams.}
+\end{figure}
+It is found that Panda is the most erratic, with $\sigma = 16.71$, while the last placed contender Thales is the most consistent with $\sigma = 8.73$. This is probably due to keeping Rooney as Captain during the pug-faced potatoe's long spell of injury.
+
+The fit of the data is shown in figure 3.
+\begin{figure}
+\includegraphics[width=\linewidth]{cumGraph.pdf}
+\caption{Fitted projections for the teams up until the end of the season. The dots show the data points and solid lines show the linear fits. The semi-transparent cones after the current gameweek (22) are the cumulative cone of $\pm1\sigma$ from the predicted scores. Again, the higher black line is Breast HA FC, while the lower black line is Thales FC.}
+\end{figure}
+It shows the three distinct bands (one for $1^{st}$ and $2^{nd}$ place, one for $3^{rd}$-$5^{th}$ and the competition for last place will continue until the end of the season. However, with the cumulative error in the fit based on the sum of $\sigma$ for each team, the end of season result is not as clear cut as perhaps Figure 1 might imply. The author would like to point out that he is unsure if a linear summation of $\sigma$ is the correct procedure here, as he does not fully remember Charles William's stats course. But it does seem logical.
+
+It would appear that the high spread does seemingly include Panda, Breast HA FC and Chirs FC with a legitimate chance of winning this years competition, but only if the leaders experience some bad results. Basically, they need to prey RvP breaks his leg. 
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{ProbabilityDensity.pdf}
+\caption{The probability density function of the predicted results at the end of the season. The meam position of the normal function is determined by the predicted score by the fit shown in figure 3, while the standard deviation is the cumulate $\sigma$ from the data.}
+\end{figure}
+
+\section{The End of the the Season}
+
+The probability density based on the predicted final season score and cumulative standard deviation is shown in figure 4.
+
+The result shows that, while St Hubbins is currently in the lead, the larger standard deviation of The Leopards gives a slight edge over the Hubbins for wining the season outright. Integrating the Leopards curve that lies higher than the Hubbins curve (the small pink slice) gives a probability of $\approx 3\%$ that The Leopards will finish the season with an outright win. This shows that First position is extremely competitive between the two leaders. If the two leaders performance until the end of the season is $-1\sigma$ below their average gameweek score to this week, the 3rd to 5th bunch players have a strong chance of claiming the league title if they maintain results $+1\sigma$ above their score. Based on the table in figure 2, this equates to an extra 10 points a week, meaning, on average, for a chance to win the average score of these mid-ranked teams must be $\approx 55$ points per week, and the leaders must average 41 points per week. With the upcoming fixtures through GW 22, a good option might be to invest in Chelsea players who have a double Gameweek. Mata as captain might be a good choice, as might be David Luiz. 
+\section{Conclusion}
+Presented is a basic statistical analysis of the EEAMFFL up to gameweek 21. It finds that either The Leopards or St Hubbins have the greatest chance of winning this season, although the centeral group of Chirs Fc, Panda and BHA FC have a decent chance at making significant advances. It seems statiscally unlikely Constorm FC or Thales FC will change position by the end of the season.
+
+
+
+
+
+
+\end{document}
+%
+% ****** End of file template.aps ******

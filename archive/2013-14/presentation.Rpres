@@ -1,0 +1,54 @@
+Fantasty Football 2013/14: Champions League
+========================================================
+author: 
+date: 
+transition: rotate
+
+
+```{r setup, echo=FALSE, error=FALSE, warning=FALSE, message=F}
+options(xtable.type = 'html')
+
+
+source("scrape_gameweekhistory.R")
+source("team_name.R")
+#source("scrape_playershistory.R")
+
+
+source("master_championsleague.R")
+source("master_stormguardsclassic.R")
+
+current_gameweek<-max(master_cl$GW)
+#player_history<-scrape_playerhistory(1:current_gameweek)
+#player_gameweek<-scrape_playerhistory(current_gameweek)
+
+```
+
+Cumulative Points
+========================================================
+
+```{r fig.width=10, fig.height=7, echo=F,error=FALSE, warning=FALSE, message=F}
+
+library(ggplot2)
+cum_points<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points")
+```
+
+Extrapolation
+========================================================
+
+```{r fig.width=10, fig.height=7, echo=F,error=FALSE, warning=FALSE, message=F}
+
+library(ggplot2)
+cum_points_extrap<-ggplot(master_cl,aes(GW,OP,colour=Team,fill=Team))
+cum_points_extrap+geom_point()+theme_bw()+xlab("Gameweek")+ylab("Total Points")+ggtitle("Cumalative Points: Linear Extrapolation")+xlim(1,38)+stat_smooth(method="lm",fullrange=T,alpha=current_gameweek/(2*38))
+```
+
+Total Value
+========================================================
+
+```{r fig.width=10, fig.height=7, echo=F,error=FALSE, warning=FALSE, message=F}
+
+total_value_cl<-ggplot(master_cl,aes(GW,TV,colour=Team,size=TM,fill=Team))
+total_value_cl+geom_point()+geom_smooth()+theme_bw()+xlab("Gameweek")+ylab("Total Value (Millions £)")+ggtitle("Total Value Chart")
+
+```
