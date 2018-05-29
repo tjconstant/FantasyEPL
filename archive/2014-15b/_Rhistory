@@ -1,0 +1,512 @@
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
+temp$TV<-as.numeric(temp$TV)
+temp$GW<-substr(temp$GW,9,stop=nchar(temp$GW))
+temp$GW<-as.numeric(temp$GW)
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+table<-data.frame(Team=xmlValue(xpathApply(doc = gameweek.html, path = '//h2')[[7]]),temp)
+table[1]
+table[1:9,]
+table[,1:10]
+table[,1:9]
+return(table[,1:9])
+scrape_gameweekhistory(id)
+id<-1374728
+scrape_gameweekhistory(id)
+source('~/Dropbox/Fantasy Football 14-15/scrape_gameweekhistory.R', echo=TRUE)
+scrape_gameweekhistory(id)
+read.table("champions_league.txt")
+source('~/.active-rstudio-document', echo=TRUE)
+scrape_gameweekhistory(564971)
+scrape_gameweekhistory(2066404)
+for(i in 1:length(ids))
+scrape_gameweekhistory(i)
+scrape_gameweekhistory(1)
+for(i in 1:length(ids))
+scrape_gameweekhistory(ids[i])
+for(i in 1:length(ids))
+scrape_gameweekhistory(ids[i])
+ids
+scrape_gameweekhistory(ids[1])
+scrape_gameweekhistory(ids[2])
+ids
+ids[1]
+ids[2]
+ids[1]
+ids<-read.table("champions_league.txt")$V1
+ids[1]
+scrape_gameweekhistory(ids[1])
+for( i in 1:length(ids))
+scrape_gameweekhistory(ids[1])
+for( i in 1:length(ids)){
+scrape_gameweekhistory(ids[i])
+}
+master<-data.frame()
+for( i in 1:length(ids)){
+master<-cbind(master,scrape_gameweekhistory(ids[i]))
+}
+master<-data.frame()
+for( i in 1:length(ids)){
+master<-rbind(master,scrape_gameweekhistory(ids[i]))
+}
+master
+library(ggplot2)
+ggplot(master,aes(GW,OP,color=Team))+geom_point()
+xmlValue(xpathApply(doc = gameweek.html, path = '//h2')
+)
+xmlValue(xpathApply(doc = gameweek.html, path = '//h2'))
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+id
+id<-id[1]
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+xmlValue(xpathApply(doc = gameweek.html, path = '//h2')
+)
+xmlValue(xpathApply(doc = gameweek.html, path = '//h2'))
+gameweek.html
+gameweek.htmxpathApply(doc = gameweek.html, path = '//h2')l
+pathApply(doc = gameweek.html, path = '//h2')
+xpathApply(doc = gameweek.html, path = '//h2')
+xpathApply(doc = gameweek.html, path = '//h1')
+source('~/.active-rstudio-document', echo=TRUE)
+master
+source('~/Dropbox/Fantasy Football 14-15/scrape_gameweekhistory.R', echo=TRUE)
+ggplot(master,aes(GW,TV,color=Team))+geom_point()
+ggplot(master,aes(GW,TV,color=Team,size=TM))+geom_point()
+source('~/Dropbox/Fantasy Football 14-15/scrape_gameweekhistory.R', echo=TRUE)
+ggplot(master,aes(GW,OP,color=Team))+geom_point()
+ggplot(master,aes(GW,TV,color=Team,size=TM))+geom_point()
+library(googleVis)
+install.packages('googleVis')
+print(gvisTable(subset(master,GW==max(master$GW)),options=list(width=540,height=250,sortColumn=7,sortAscending=F)),'chart')
+library(googleVis)
+print(gvisTable(subset(master,GW==max(master$GW)),options=list(width=540,height=250,sortColumn=7,sortAscending=F)),'chart')
+today
+date
+date()
+?subset
+print(gvisTable(subset(master,GW==max(master$GW),select = c(1:2,4:8)),options=list(width=640,height=500,sortColumn=8,sortAscending=F)),'chart')
+print(gvisTable(subset(master,GW==max(master$GW),select = c(1:2,4:9)),options=list(width=640,height=500,sortColumn=6,sortAscending=F)),'chart')
+library(shiny)
+checkboxGroupInput(inputId = "teams",choices = unique(master$Team))
+checkboxGroupInput(inputId = "teams",label = "Choose Teams:",choices = unique(master$Team))
+checkboxGroupInput(inputId = "teams",label = "Choose Teams:",choices = unique(master$Team),selected = -1)
+checkboxGroupInput(inputId = "teams",label = "Choose Teams:",choices = unique(master$Team))
+checkboxGroupInput(inputId = "teams",label = "Choose Teams:",choices = unique(master$Team),selected = 1:length(unique(master$Team)))
+?subset
+?checkboxGroupInput
+list('Constorm FC')
+list('Constorm FC', 'The One Who Left')
+master %in% list('Constorm FC', 'The One Who Left')
+list('Constorm FC', 'The One Who Left') %in% master
+list('Constorm FC', 'The One Who Left')
+master[list('Constorm FC', 'The One Who Left')]
+master[list('Constorm FC', 'The One Who Left'),]
+master[master %in% list('Constorm FC', 'The One Who Left'),]
+master[master %in% list('Constorm FC', 'The One Who Left')]
+master[master %in% list('Constorm FC', 'The One Who Left'),]
+master[master %in% list('Constorm FC'),]
+master[master$Team %in% list('Constorm FC'),]
+master[master$Team %in% list('Constorm FC', 'The One Who Left'),]
+ggplot(master[master$Manager %in% input$teams2plotTV,],aes(GW,TV,color=Manager,size=TM))+geom_point(size=2)
+devtools::install_github("rstudio/shinyapps")
+shinyapps::deployApp()
+shinyapps::deployApp(appName = "FF1415")
+shinyapps::terminateApp(appName = "FF1415")
+shinyapps::deployApp(appName = "FF1415")
+xpathApply(doc = gameweek.html, path = '//h2')
+xpathApply(doc = gameweek.html, path = '//td')
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"FormattedNumber",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"FormattedNumber",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+install.packages("shiny")
+install.packages(c("class", "httr", "markdown", "Matrix", "mgcv", "mime", "RCurl", "RJSONIO", "sfsmisc"))
+master
+master$TV
+master$TV[1]
+master$TV[1]*7
+print(master)
+library(shiny)
+library("shinyapps", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+shinyapps::deployApp()
+source('~/.active-rstudio-document', echo=TRUE)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_histogram()
+?geom_histogram
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_histogram(binwidth = 0.1)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_histogram(binwidth = 1)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_histogram(binwidth = 13)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_histogram(binwidth = 4)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(binwidth = 4)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(binwidth = 5)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP,colour='red'))+geom_density()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP,fill='red'))+geom_density()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP,fill='blue'))+geom_density()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP,fill=1))+geom_density()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue')
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.1)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.2)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,150)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+stat_summary()
+ggplot(subset(master,GW==max(master$GW)),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+unique(master$Manager)
+as.character(unique(master$Manager))
+ggplot(master[master$Manager %in% input$teams2plotTV,],aes(GW,TV,color=Manager,size=TM))+geom_point()
+master
+source('~/.active-rstudio-document', echo=TRUE)
+scrape_gameweekhistory(1374728)
+scrape_gameweekhistory(32492)
+scrape_gameweekhistory(564971)
+scrape_gameweekhistory(2066404)
+scrape_gameweekhistory(2396193)
+scrape_gameweekhistory(1374728)
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
+header=T,which=1,
+colClasses=c("character",
+"numeric",
+"FormattedNumber",
+"numeric",
+"character",
+"FormattedNumber",
+"FormattedNumber"),
+stringsAsFactors = FALSE)
+temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
+temp$TV<-as.numeric(temp$TV)
+temp$GW<-substr(temp$GW,9,stop=nchar(temp$GW))
+temp$GW<-as.numeric(temp$GW)
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
+table<-data.frame(Team=xmlValue(xpathApply(doc = gameweek.html, path = '//h2')[[7]]),Manager=xmlValue(xpathApply(doc = gameweek.html, path = '//h1')[[4]]),temp)
+table
+scrape_gameweekhistory(4828)
+scrape_gameweekhistory(1641516)
+ggplot(subset(master,GW, alpha=GW,aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+)
+library(ggplot2)
+ggplot(master,aes(x=GP,alpha=GW))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+master
+source('~/.active-rstudio-document', echo=TRUE)
+ggplot(master,aes(x=GP,alpha=GW))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,color=GW))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,color=factor(GW)))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GWfill=GW,,color=factor(GW)))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,fill=GW,,color=factor(GW)))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,fill=GW,color=factor(GW)))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,fill=GW,color=factor(GW)))+geom_density(+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,fill=GW,color=factor(GW)))+geom_density()+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,alpha=GW,fill=factor(GW),color=factor(GW)))+geom_density()+xlim(0,120)
+ggplot(master,aes(x=GP,group=GW,fill=factor(GW),color=factor(GW)))+geom_density()+xlim(0,120)
+wait
+Sys.sleep(1)
+source('~/.active-rstudio-document', echo=TRUE)
+ggplot(master[master$Manager %in% input$teams2plotTV,],aes(GW,TV,color=Manager,size=TM))+geom_point()+geom_line()
+lib
+library(shiny)
+?checkboxGroupInput
+write.csv(master, "master.csv")
+source('~/.active-rstudio-document', echo=TRUE)
+master
+source('~/.active-rstudio-document', echo=TRUE)
+print(gvisTable(subset(master,GW==max(master$GW),select = c(1:2,4:10)),options=list(width=640,height=500,sortColumn=7,sortAscending=F)),'chart')
+?write.table
+write.csv(master, "master.csv",row.names=F)
+master
+source('~/.active-rstudio-document', echo=TRUE)
+master
+ggplot(master[master$Manager %in% input$teams2plotTV,],aes(GW,TV,color=Manager,size=TM))+geom_point()+stat_smooth(method = "lm")
+?checkboxGroupInput
+max(master$GW)
+max(master$GW)/38
+master$team
+master$Team
+renderDataTable
+?renderDataTable
+renderDataTable(expr = subset(master,GW==max(master$GW))
+renderDataTable(expr = subset(master,GW==max(master$GW)))
+options=list(order=c(9,"desc")))
+options=list(order=list(9,"desc")))
+?renderPlot
+ggplot(subset(master,GW==input$probdistGW),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(x=50))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(x=5p0))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(x=500))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(x=factor(50)))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=50))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=master$GW))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=master$GP))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=master$GP[master$Team=="Constorm FC"]))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=master$GP[master$GW==2 & master$Team=="Constorm FC"]))
+p+geom_vline(aes(xintercept=master$GP[master$GW==input$probdistGW & master$Team==input$current_manager])))
+ggplot(subset(master,GW==2),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()+geom_vline(aes(xintercept=master$GP[master$GW==2 & master$Team=="Constorm FC"]))
+p+geom_vline(aes(xintercept=GP[1]))
+?vline
+?geom_vl
+?geom_vline
+?geom_smooth
+library(shinyapps)
+deployApp()
+#`r subset(master,GW==max(master$GW)`
+subset(master,GW==max(master$GW)
+)
+master$Team[master$OP==max(master$OP)]
+master$Team[master$OP==max(master$OP),]
+master$Team[master$OP==max(master$OP)]
+as.character(master$Team[master$OP==max(master$OP)])
+deployApp()
+ids<-read.table("champions_league.txt")$V1
+ids[1]
+i<-ids[1]
+temp<-data.frame(Team="Constorm FC", GW=1,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",j,sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+))
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+))
+temp<-data.frame(Team="Constorm FC", GW=1,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+))
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=2,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+which=3,stringsAsFactors = FALSE,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=3,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+which=0,stringsAsFactors = FALSE,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=0,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=1,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=1:6,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+which=0:6,stringsAsFactors = FALSE,
+readHTMLTable(paste("http://fantasy.premierleague.com/entry/",i,"/event-history/",1,"/",sep=""),
+which=0:6,stringsAsFactors = FALSE,
+colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
+)
+gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/event-history/1/",sep=""),useInternal = TRUE)
+gameweek.html
+xpathApply(doc = gameweek.html, path = '//h2')
+xpathApply(doc = gameweek.html, path = '//table')
+xpathApply(doc = gameweek.html, path = '//table')[[11]]
+xmlValue(xpathApply(doc = gameweek.html, path = '//table')[[11]])
+xpathApply(doc = gameweek.html, path = '//tr')
+xpathApply(doc = gameweek.html, path = '//tr')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[2]
+xpathApply(doc = gameweek.html, path = '//tr')[3]
+xpathApply(doc = gameweek.html, path = '//tr')[4]
+xpathApply(doc = gameweek.html, path = '//tr')[5]
+xpathApply(doc = gameweek.html, path = '//tr')[6]
+xpathApply(doc = gameweek.html, path = '//tr')[7]
+xpathApply(doc = gameweek.html, path = '//table')[7]
+xpathApply(doc = gameweek.html, path = '//table')
+xpathApply(doc = gameweek.html, path = '//table')[1:10]
+xpathApply(doc = gameweek.html, path = '//table')[1]
+xmlValue(
+xpathApply(doc = gameweek.html, path = '//table')[1])
+xpathApply(doc = gameweek.html, path = '//table')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[2]
+xpathApply(doc = gameweek.html, path = '//tr')[2:10]
+xpathApply(doc = gameweek.html, path = '//tr')[2:5]
+xpathApply(doc = gameweek.html, path = '//tr')
+xpathApply(doc = gameweek.html, path = '//tr id')
+xpathApply(doc = gameweek.html, path = '//tr')
+xpathApply(doc = gameweek.html, path = '//tr')[44]
+xpathApply(doc = gameweek.html, path = '//tr')[34]
+xpathApply(doc = gameweek.html, path = '//tr')[24]
+xpathApply(doc = gameweek.html, path = '//tr')[14]
+xpathApply(doc = gameweek.html, path = '//tr')[11]
+xpathApply(doc = gameweek.html, path = '//tr')[5]
+xpathApply(doc = gameweek.html, path = '//tr')[2]
+xpathApply(doc = gameweek.html, path = '//tr')[3]
+xpathApply(doc = gameweek.html, path = '//tr')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[2]
+xpathApply(doc = gameweek.html, path = '//tr')[3]
+xpathApply(doc = gameweek.html, path = '//tr')[34]
+xpathApply(doc = gameweek.html, path = '//tr')[1:34]
+xpathApply(doc = gameweek.html, path = '//tr')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[2]
+xpathApply(doc = gameweek.html, path = '//tbody')[1]
+xpathApply(doc = gameweek.html, path = '//tr')[1]
+xpathApply(doc = gameweek.html, path = '//td')[1]
+xpathApply(doc = gameweek.html, path = '//td')[1:2]
+xpathApply(doc = gameweek.html, path = '//td')[1:10]
+xpathApply(doc = gameweek.html, path = '//td')[1:100]
+xpathApply(doc = gameweek.html, path = '//tbody')[1:100]
+xpathApply(doc = gameweek.html, path = '//tbody')[1]
+xpathApply(doc = gameweek.html, path = '//tbody')[2]
+xpathApply(doc = gameweek.html, path = '//tbody')[1]
+xpathApply(doc = gameweek.html, path = '//td')[1]
+xpathApply(doc = gameweek.html, path = '//td')[2]
+xpathApply(doc = gameweek.html, path = '//td')[3]
+xpathApply(doc = gameweek.html, path = '//td')[4]
+xpathApply(doc = gameweek.html, path = '//td')[5]
+xpathApply(doc = gameweek.html, path = '//td')[6]
+xpathApply(doc = gameweek.html, path = '//td')[1]
+xpathApply(doc = gameweek.html, path = '//td')[2]
+xpathApply(doc = gameweek.html, path = '//table)
+)
+xpathApply(doc = gameweek.html, path = '//table')
+xpathApply(doc = gameweek.html, path = '//table')[1]
+xpathApply(doc = gameweek.html, path = '//table')[2]
+xpathApply(doc = gameweek.html, path = '//table')[1]
+id
+library(shiny)
+?updateCheckboxGroupInput
+?isolate
+deployApp()
+?img
+ggplot(master,aes(x=GP,color=Manager))+geom_density()
+master
+ggplot(master,aes(x=GP,color=Manager))+geom_density()
+ggplot(master,aes(x=GP,color=Manager))+geom_histogram()
+ggplot(master,aes(x=GP,color=Manager))+geom_density()
+?geom_density
+ggplot(master,aes(x=GP,color=Team))+geom_density()
+ggplot(master,aes(x=GP,group=Team))+geom_density()
+ggplot(master,aes(x=GP))+geom_density()
+ggplot(master,aes(x=GP,fill=Team))+geom_density()
+master
+ggplot(master,aes(x=GP,fill=Team))+geom_density()
+ggplot(master,aes(x=GP,fill=Team))+geom_boxplot()
+ggplot(master,aes(x=GP,y=GW,fill=Team))+geom_boxplot()
+ggplot(master,aes(x=GW,y=GP,fill=Team))+geom_boxplot()
+ggplot(master,aes(x=GW,y=GP,fill=Team))+geom_density()
+ggplot(master,aes(y=GP,fill=Team))+geom_density()
+ggplot(master,aes(x=GP,fill=Team))+geom_density()
+ggplot(master,aes(x=TV,y=GP,fill=Team))+geom_density()
+ggplot(master,aes(x=TV,y=GP,fill=Team))+geom_density2d()
+ggplot(master,aes(x=TV,y=GP,fill=Team))
+ggplot(master,aes(x=TV,y=GP,fill=Team))+geom_contour()
+master
+ggplot(master,aes(x=TV,y=GW,z=OP))+geom_contour()
+ggplot(master,aes(x=OP))
+ggplot(master,aes(x=OP))+geom_density()
+ggplot(master,aes(x=OP,fill=Team))+geom_density()
+ggplot(master,aes(x=OP,fill=Team))+geom_area()
+ggplot(master,aes(x=OP,fill=Team))+geom_density()
+ggplot(master,aes(x=OP))+geom_density()
+ggplot(master,aes(x=OP))+geom_density()+facet_grid(.~Team)
+master
+rbind(master,master)
+temp<-master
+temp$GW<-team$GW+2
+temp$GW<-temp$GW+2
+ggplot(rbind(master,temp),aes(x=OP))+geom_density()
+ggplot(rbind(master,temp),aes(x=OP,fill=Team))+geom_density()
+ggplot(rbind(master,temp),aes(x=OP,fill=Manager))+geom_density()
+ggplot(rbind(master,temp),aes(x=OP,fill=Manager))+geom_density(alpha=0.5)+theme_bw()
+source('~/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+library(shinyapps)
+deployApp()
+library(RCurl)
+ftpUpload("master.csv",to="ftp://people.ex.ac.uk/FF/master.csv", userpwd="tjc202:maXwell1864")
+ftpUpload("master.csv",to="ftp://people.ex.ac.uk/FF/master.csv", userpwd="tjc202:maXwell1864")
+ftpUpload("master.csv",to="ftp://people.ex.ac.uk/FF/master.csv", userpwd="tc340:maXwell1864")
+ftpUpload("master.csv",to="ftp://people.ex.ac.uk/master.csv", userpwd="tc340:maXwell1864")
+source('C:/Users/Tom/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+install.packages('XML')
+source('C:/Users/Tom/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+source('C:/Users/Tom/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+source('C:/Users/Tom/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+source('C:/Users/Tom/Dropbox/Fantasy Football 14-15/download_data.R', echo=TRUE)
+source('~/.active-rstudio-document', echo=TRUE)
+read.csv("http://people.exeter.ac.uk/tc340/master.csv")
+install.packages('googleVis')
+install.packages('shinyapps')
+library(shinyapps)
+deployApp()
+pwd()
+?setwd
+getwd()
+setwd("C:/Users/Tom/Dropbox/Fantasy Football 14-15/")
+library(shinyapps)
+deployApp()
+library(shiny)
+?renderDataTable
+source('~/.active-rstudio-document', echo=TRUE)
+subset(master,GW==max(master$GW)
+)
+subset(master,GW==max(master$GW))
+cbind(1:13,subset(master,GW==max(master$GW)))
+cbind(1:16,subset(master,GW==max(master$GW)))
+library(devtools)
+install_github("hadley/rvest")
+library(rvest)
+library("rvest", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+install.packages(c("caTools", "cluster", "codetools", "formatR", "htmltools", "jsonlite", "KernSmooth", "labeling", "Lahman", "markdown", "MASS", "mgcv", "spam", "xtable"))
+library(rvest)
+ids<-read.table("champions_league.txt")$V1
+paste("http://fantasy.premierleague.com/entry/",ids[1],"/history/",sep="")
+html(paste("http://fantasy.premierleague.com/entry/",ids[1],"/history/",sep=""))
+html(paste("http://fantasy.premierleague.com/entry/",ids[1],"/history/",sep=""))->test
+html_nodes(test, "table td")
+test
+html_nodes(test, "h2")
+html_nodes(test, "h2")[[8]]
+html_nodes(test, "h2")[[8]] %>% html_text()
+source('~/.active-rstudio-document', echo=TRUE)
+master
+library(shinyapps)
+deployApp()
+test<-html(http://fantasy.premierleague.com/entry/1374728/event-history/4/)
+test<-html(http://fantasy.premierleague.com/entry/1374728/event-history/4)
+test<-html("http://fantasy.premierleague.com/entry/1374728/event-history/4")
+html_nodes(test, "h2")[[8]]
+html_nodes(test, "table")
+html_nodes(test, "table") %>% htmltable()
+html_nodes(test, "table") %>% html_table()
+html_nodes(test, "table")[[1]] %>% html_table()
+html_nodes(test, "table")[[2]] %>% html_table()
+html_nodes(test, "table")[[3]] %>% html_table()
+html_nodes(test, "td")[[3]] %>% html_table()
+html_nodes(test, "td")[[3]]
+html_nodes(test, "td")[[4]]
+html_nodes(test, "td")[[1]]
+html_nodes(test, "td")[[2]]
+html_nodes(test, "td")[[3]]

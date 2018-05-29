@@ -1,0 +1,103 @@
+---
+title: "Fantasy Football 14-15 Champions League"
+runtime: shiny
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+---
+<style>
+.checkbox, .radio {
+  display: inline-table;
+}
+</style>
+```{r,message=FALSE,warning=FALSE,error=FALSE,echo=FALSE}
+library(ggplot2)
+
+master<-read.csv("http://people.exeter.ac.uk/tc340/master.csv")
+```
+
+```{r,echo=FALSE}
+selectInput(inputId = "current_team", label="Choose Your Team", c("All",unique(as.character(master$Team))), selected = "All", multiple = FALSE, selectize = TRUE, width = NULL)
+
+```
+
+-------------------
+
+##Current Leader: `r as.character(master$Team[master$OP==max(master$OP)])`
+
+### Manager: `r as.character(master$Manager[master$OP==max(master$OP)])`
+
+--------------------
+
+##Gameweek `r max(master$GW)` League Table
+
+Current league table as of `r date()`
+
+```{r,results='asis',message=FALSE,warning=FALSE,error=FALSE,fig.align='center',echo=FALSE}
+renderDataTable(expr = subset(master,GW==max(master$GW)),
+                options=list(aaSorting = list(c(8, "desc"))))
+```
+
+------
+
+##Gameweek `r max(master$GW)` Probabilty Distribution
+```{r, echo=FALSE}
+selectInput(inputId = "probdistGW", label="Choose Gameweek", unique(master$GW), selected = max(master$GW), multiple = FALSE, selectize = TRUE, width = NULL)
+
+renderPlot({
+  p<-ggplot(subset(master,GW==input$probdistGW),aes(x=GP))+geom_density(fill='blue',alpha=0.2)+xlim(0,120)+theme_bw()
+ p+geom_vline(data=subset(master,GW==input$probdistGW & Team==input$current_team),aes(xintercept=GP),color='orange',show_guide = T)
+  },height = 600)
+```
+
+-----
+
+##Cumalative Points
+```{r,message=FALSE,warning=FALSE,error=FALSE,echo=FALSE}
+
+selectInput(inputId = "cumalativeFit", label="Choose Line", c("Lines","Smooth Fit","Linear Fit","Linear Extrapolation Fit"), selected = "Lines", multiple = FALSE, selectize = TRUE, width = NULL)
+
+renderPlot({
+  
+  p<-ggplot(master[master$Manager %in% input$teams2plotOP,],aes(GW,OP,fill=Manager,color=Manager))+geom_point()+theme_bw()+geom_line(data=subset(master[master$Manager %in% input$teams2plotOP,],Team==input$current_team),size=2,color='orange')
+  
+  if(input$cumalativeFit=="Lines") print(p+geom_line())
+  if(input$cumalativeFit=="Smooth Fit") print(p+stat_smooth(alpha=max(master$GW)/38))
+  if(input$cumalativeFit=="Linear Fit") print(p+stat_smooth(method = "lm",alpha=max(master$GW)/38))
+  if(input$cumalativeFit=="Linear Extrapolation Fit") print(p+stat_smooth(method = "lm",formula = y~x+0,fullrange = T,alpha=max(master$GW)/(2*38))+xlim(0,38))
+  
+},height = 600)
+
+
+  
+  checkboxGroupInput(inputId = "teams2plotOP",label = "Choose Teams:",choices = as.character(unique(master$Manager)),selected = unique(master$Manager))
+
+renderUI({
+  if(input$clearOP>0){
+    updateCheckboxGroupInput(session, "teams2plotOP",selected = "")
+  } 
+})
+
+actionButton(inputId="clearOP", label="Deselect all")
+```
+
+-----
+
+##Team Value
+```{r,message=FALSE,warning=FALSE,error=FALSE,echo=FALSE}
+
+renderPlot({
+  ggplot(master[master$Manager %in% input$teams2plotTV,],aes(GW,TV,color=Manager,size=TM))+geom_point()+theme_bw()+geom_smooth(size=0.5)
+},height = 600)
+
+checkboxGroupInput(inputId = "teams2plotTV",label = "Choose Teams:",choices = as.character(unique(master$Manager)),selected = unique(master$Manager))
+
+renderUI({
+  if(input$clearTV>0){
+    updateCheckboxGroupInput(session, "teams2plotTV",selected = "")
+  } 
+})
+
+actionButton(inputId="clearTV", label="Deselect all")
+```

@@ -1,0 +1,59 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(XML)
+> 
+> getwd()
+[1] "C:/Users/Tom"
+> 
+> scrape_gameweekhistory<-function(id){
++   
++   temp<-readHTMLTable(doc=paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),as.data.frame=T,
++                       header=T,which=1,
++                       colClasses=c("character",
++                                    "numeric",
++                                    "FormattedNumber",
++                                    "numeric",
++                                    "numeric",
++                                    "character",
++                                    "FormattedNumber",
++                                    "FormattedNumber"),
++                       stringsAsFactors = FALSE)
++   
++   temp$TV<-(substr(temp$TV,2,nchar(temp$TV)-1))
++   temp$TV<-as.numeric(temp$TV)
++   
++   temp$GW<-substr(temp$GW,9,stop=nchar(temp$GW))
++   temp$GW<-as.numeric(temp$GW)
++   
++   gameweek.html<-htmlTreeParse(paste("http://fantasy.premierleague.com/entry/",id,"/history/",sep=""),useInternal = TRUE)
++   
++   table<-data.frame(Team=xmlValue(xpathApply(doc = gameweek.html, path = '//h2')[[7]]),Manager=xmlValue(xpathApply(doc = gameweek.html, path = '//h1')[[4]]),temp)
++   
++   return(table[,1:9])
++   
++ }
+> 
+> ids<-read.table("champions_league.txt")$V1
+Error in file(file, "rt") : cannot open the connection
+Calls: read.table -> file
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'champions_league.txt': No such file or directory
+Execution halted
