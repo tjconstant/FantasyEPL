@@ -1,0 +1,3 @@
+[submodule "ffs.query"]
+	path = ffs.query
+	url = https://github.com/tjconstant/ffs.query
